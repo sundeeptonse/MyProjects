@@ -15,6 +15,9 @@ public class HeteroGenousContainer {
 		fav.putFavorite(Integer.class, 456);
 		fav.putFavorite(Float.class,2345.4f);
 		
+		
+		int[] arr = {0,1,1};
+		
 		//Compile Time Error - Doesn't work
 		//fav.putFavorite(float.class,2345.4);
 		//fav.putFavorite(Integer.class,"23232");

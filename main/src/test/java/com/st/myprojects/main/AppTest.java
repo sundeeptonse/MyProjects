@@ -1,7 +1,5 @@
 package com.st.myprojects.main;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -37,4 +35,7 @@ public class AppTest
     {
     	assertTrue( true );
     }
+    
+    
+    
 }

@@ -3,9 +3,6 @@ package com.st.myprojects.main.object;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.st.myprojects.main.util.HashCodeGen;
-import com.st.myprojects.main.util.Significant;
-
 public class Equal {
 
 	private static Map<? super Object, String> testMap = new HashMap<>();
@@ -26,6 +23,8 @@ public class Equal {
 		 */
 
 		System.out.println(new PointWithHashCode(10, 12).hashCode());
+
+		System.out.println("Test:" + new PointWithHashCode(10, 12));
 
 	}
 
@@ -68,6 +67,7 @@ class PointWOHashCode {
 
 class PointWithHashCode {
 
+	//Set Significant
 	private final int x;
 	private final int y;
 	private boolean booleanValue = false;
@@ -76,9 +76,7 @@ class PointWithHashCode {
 	private short shortValue = 2;
 	private char charValue = 'C';
 
-	@Significant
 	private long longValue = 44444444;
-	@Significant
 	private double doubleValue = 44444444444444444.4d;
 	private float floatValue = 1.1f;
 	private Object objValue = new Object();
@@ -112,7 +110,13 @@ class PointWithHashCode {
 
 	@Override
 	public int hashCode() {
-		return HashCodeGen.hashCode(this);
+		// return HashCodeGen.hashCode(this);
+		return 42;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("(%03d) %03d-%04d", 224, 829, 5061);
 	}
 
 }

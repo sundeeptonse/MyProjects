@@ -1,6 +1,8 @@
 package com.st.myprojects.main.lambda;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class MyBasicLambda {
 
@@ -8,15 +10,36 @@ public class MyBasicLambda {
 
 	public static void main(String[] args) {
 
-		// Basic
-		Arrays.asList("a", "b", "d").forEach(e -> System.out.println(e));
+		List<String> list = Arrays.asList("a", "b", "d");
+		List<Number> list2 = Arrays.asList(1, 2, 2, 3);
+
+		// Foreach provided by Iterable
+		// Basic ForEach
+		System.out.println("-----Basic For Each");
+		list2.forEach(new Consumer<Number>() {
+			@Override
+			public void accept(Number t) {
+				System.out.println("Value:" + t.intValue());
+			}
+		});
+
+		System.out.println("-----Lambda");
 
 		// Type Casting
-		Arrays.asList("a", "b", "d").forEach(
-				(String e) -> System.out.println(e));
+		list.forEach((String e) -> System.out.println(e));
+
+		// Basic
+		list.forEach(e -> System.out.println(e));
 
 		// Numeric Type casting
-		Arrays.asList(1, 2, 3).forEach((Number e) -> System.out.println(e));
+		list2.forEach((Number e) -> System.out.println(e));
+
+		// Without Doing Anything - Woah
+		System.out.println("-----Woah");
+		//Basically Letting the compiler know that function needs to be passed along 
+		//Method Reference Syntax
+		list.forEach(System.out::println);
+		System.out.println("-----Woah");
 
 		// Usage of Class Member Variables
 		final String test1 = "test1";
@@ -27,7 +50,7 @@ public class MyBasicLambda {
 
 		// Class Variables can choose not to be final --> Why ?
 		gvar = "Update";
-		Arrays.asList("a", "b", "d").forEach(e -> {
+		list.forEach(e -> {
 			System.out.println(e + ":" + test1);
 			System.out.println(e + ":" + test2);
 			System.out.println(e + ":" + gvar);

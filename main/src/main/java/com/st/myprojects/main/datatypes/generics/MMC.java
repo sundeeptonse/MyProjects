@@ -1,19 +1,23 @@
 package com.st.myprojects.main.datatypes.generics;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MMC {
 
 	private static String key = "This is a new Key";
 	private static Integer value = new Integer(10);
-	private static NotGeneric nGen = new NotGeneric(key, value);
+	/*
+	private static NotGeneric  nGen = new NotGeneric(key, value);
+	
+	
+	
+	
 	private static IsGeneric<String, Integer> isGen = new IsGeneric<>(key, value);
 	private static IsGeneric<List<List<List<String>>>, Integer> isGen2;
+	*/
 	
 	public static void main(String[] args) {
 
-		
+		/*
 		//Since this is of Return Type Object, we need to do an explicit Return
 		System.out.println("::" + nGen.getKey());
 		System.out.println("::" + nGen.getValue());
@@ -34,7 +38,7 @@ public class MMC {
 		CustomExtendsB5<ArrayList<Number>> customExtendsb5 = new CustomExtendsB5<>();
 		
 		CustomExtendsB6<ArrayList<Object>> customExtendsb6 = new CustomExtendsB6<>();
-		
+		*/
 		
 		
 	}

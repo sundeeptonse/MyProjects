@@ -28,12 +28,19 @@ public class ShiftOps {
 	public static void main(String... args) {
 		long value = 222;
 		System.out.println((int) value >>> 32);
-		
+
 		int bitmask = 0x000F;
 		System.out.println(bitmask);
-        int val = 0x2222;
-        // prints "2"
-        System.out.println(val & bitmask);
+		int val = 0x2222;
+		// prints "2"
+		System.out.println(val & bitmask);
+
+		for (int i = 0; i < 10; i++) {
+			System.out.printf("1<< %d : %d\n", i, (1 << i));
+			System.out.printf("1>> %d : %d\n", i, (1 >> i));
+
+		}
+
 	}
 
 }

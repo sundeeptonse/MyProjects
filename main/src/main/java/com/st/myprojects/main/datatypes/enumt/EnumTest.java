@@ -100,6 +100,7 @@ enum Operation {
 	TIMES("*") {
 		@Override
 		double apply(double x, double y) {
+			
 			return x * y;
 		}
 	},
@@ -108,7 +109,15 @@ enum Operation {
 		double apply(double x, double y) {
 			return x / y;
 		}
+	},
+	SUBTRACTNDIVIDE("-/") {
+		@Override
+		double apply(double x, double y) {
+			x  = MINUS.apply(x, y);
+			return x / y;
+		} 
 	};
+	
 	abstract double apply(double x, double y);
 
 	private final String symbol;

@@ -11,9 +11,14 @@ enum Company2 {
 public class EnumTest {
 
 	
-	
+	/**
+	 * A Company Type
+	 * */
 	public enum Company {
-		EBAY(30), PAYPAL(10, 20), GOOGLE(15, 20), YAHOO(20, 20), ATT(25, 25), SUNDEEP(
+		/** EBAY*/
+		EBAY(30), 
+		/**PAYPAL */
+		PAYPAL(10, 20), GOOGLE(15, 20), YAHOO(20, 20), ATT(25, 25), SUNDEEP(
 				50, 60, 70);
 		private int value1;
 		private int value2;
@@ -144,7 +149,8 @@ enum Operation {
 	}
 
 	/*
-	 * 
+	 * This method has been <i>overriden<i/>. This needs to be taken into account
+	 * {@code if(this.symbol.length > 0 ){ }}
 	 */
 	@Override
 	public String toString() {

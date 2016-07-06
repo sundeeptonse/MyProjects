@@ -1,4 +1,4 @@
-package com.st.myprojects.main.datatypes.generics;
+package com.st.myprojects.main.datatypes.generics.random;
 
 import java.util.List;
 
@@ -62,6 +62,8 @@ public class IsGeneric<K extends Object,V extends Object> {
 	public <T> boolean getDifference(T... value){
 		return false;
 	}
+	
+	
 	
 	
 

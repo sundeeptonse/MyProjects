@@ -1,4 +1,4 @@
-package com.st.myprojects.main.datatypes.generics;
+package com.st.myprojects.main.datatypes.generics.random;
 
 import java.util.ArrayList;
 

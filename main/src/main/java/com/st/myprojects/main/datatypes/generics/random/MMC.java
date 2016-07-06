@@ -1,4 +1,4 @@
-package com.st.myprojects.main.datatypes.generics;
+package com.st.myprojects.main.datatypes.generics.random;
 
 
 public class MMC {
@@ -39,6 +39,10 @@ public class MMC {
 		
 		CustomExtendsB6<ArrayList<Object>> customExtendsb6 = new CustomExtendsB6<>();
 		*/
+		
+		IsGeneric<String, String> test = new IsGeneric<>();
+		
+		test.getDifference("1",0,"2",1.1);
 		
 		
 	}

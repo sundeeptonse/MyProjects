@@ -66,7 +66,7 @@ public class SingletonFactory {
 			}
 		}
 		if(stats){
-			DateUtil.printDateDifference(time, statsTime);
+			DateUtil.printTimeDifference(time, statsTime);
 		}
 		return classType.cast(singletonObj);
 	}

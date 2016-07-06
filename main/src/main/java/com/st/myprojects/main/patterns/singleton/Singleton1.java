@@ -2,6 +2,13 @@ package com.st.myprojects.main.patterns.singleton;
 
 import java.io.Serializable;
 
+/**
+ * Just Testing some javadocs
+ * This method has been {@literal <i>Tested</i>.}  This needs to be taken into account
+ * ({@code index < 0 || index >= this.size()})
+ * 
+ */
+
 public class Singleton1{
 
 	/**
@@ -12,6 +19,13 @@ public class Singleton1{
 	private static final Singleton1 INSTANCE = new Singleton1();
 	private Singleton1(){}
 	
+	/**
+	 * Just Testing some javadocs
+	 * This method has been <i>Tested</i>. This needs to be taken into account
+	 * @param <T> Test
+	 * @param <Class<T>> type
+ 	 * 
+	 */
 	public static <T extends Object> T getInstance(Class<T> type){
 		return type.cast(INSTANCE);
 	}

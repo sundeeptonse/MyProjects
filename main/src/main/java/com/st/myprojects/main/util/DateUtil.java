@@ -28,12 +28,21 @@ public class DateUtil {
 		}
 	}
 	
-	public static final void printDateDifference(long timeInNano, Time time){
+	public static final void printTimeDifference(long timeInNano, Time time){
 		long dateDiff = System.nanoTime() - timeInNano;
 		dateDiff/=time.value;
 		StringBuilder sb = new StringBuilder();
 		sb.append("Date Difference in ").append(time).append(" is ").append(dateDiff);
 		System.out.println(sb.toString());
-			
+	}
+	
+	public static final long getTimeDifference(long timeInNano, Time time){
+		long dateDiff = System.nanoTime() - timeInNano;
+		dateDiff/=time.value;
+		return dateDiff;
+	}
+	
+	public static final long getMutliplicatiorFactor(long timeA, long timeB){
+		return timeA/timeB;
 	}
 }

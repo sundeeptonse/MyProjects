@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.st.myprojects.main.datatypes.generics;
+package com.st.myprojects.main.datatypes.generics.random;
 
 /**
  * @author sundeeptonse

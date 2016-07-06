@@ -29,7 +29,7 @@ public class Autoboxing {
 			}
 			System.out.println("Primitive:" + isPrimitive + ":Sum is:" + sum);
 		}
-		DateUtil.printDateDifference(timeInNano, Time.ms);
+		DateUtil.printTimeDifference(timeInNano, Time.ms);
 	}
 
 }

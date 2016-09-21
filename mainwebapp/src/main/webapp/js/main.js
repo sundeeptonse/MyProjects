@@ -6,4 +6,6 @@ require.config({
 });
 
 //requirejs(['oobasics/TypesReference']);
-requirejs(['oobasics/Function']);
+//requirejs(['oobasics/Function']);
+//requirejs(['oobasics/ObjectsThis']);
+requirejs(['oobasics/Objects']);

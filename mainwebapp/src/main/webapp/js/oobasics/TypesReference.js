@@ -24,8 +24,8 @@ define([ "utils/customConsole" ], function(customConsole) {
 
 	object1.text = "Hello";
 
-	customConsole.printobj("Object1", object1);
-	customConsole.printobj("Object2", object2);
+	customConsole.printObj("Object1", object1);
+	customConsole.printObj("Object2", object2);
 	
 
 	/*
@@ -37,7 +37,7 @@ define([ "utils/customConsole" ], function(customConsole) {
 	book.name = "The Principles of";
 	book.year = "2014";
 
-	customConsole.printobj("Book", book);
+	customConsole.printObj("Book", book);
 
 	//Literal
 	var book2 = {
@@ -45,7 +45,7 @@ define([ "utils/customConsole" ], function(customConsole) {
 		year : "2015"
 	}
 	
-	customConsole.printobj("Book2", book2);
+	customConsole.printObj("Book2", book2);
 	
 	
 	

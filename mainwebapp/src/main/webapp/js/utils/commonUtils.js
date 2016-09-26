@@ -16,6 +16,9 @@ define(function() {
 				properties = Object.keys(object);
 			}
 			return properties;
+		},
+		hasPrototypeProperty : function(object, name){
+			return name in object && !object.hasOwnProperty(name);
 		}
 
 	};

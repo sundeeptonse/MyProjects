@@ -11,4 +11,5 @@ require.config({
 //requirejs(['oobasics/Objects']);
 //requirejs(['oobasics/ObjectsAdv_Constructor']);
 //requirejs(['oobasics/ObjectsAdv_Prototype']);
-requirejs(['oobasics/ObjectsAdv_Inheritance']);
+//requirejs(['oobasics/ObjectsAdv_Inheritance']);
+requirejs(['oobasics/Object_Patterns']);

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="js/thirdparty/angular/1.5/angular.js"></script>
+<title>Angular JS Example</title>
+</head>
+<body ng-app>
+
+	<!--  Expressions -->
+	<p>The number {{3 / 4}}.</p>
+	<p>The number {{3 * 4}}.</p>
+	<p>Are strings and numbers equal? {{'2' === 2}}</p>
+	<p>{{"Angular" + "js".toUpperCase()}}</p>
+	<p>{{a = 1; a + a}}</p>
+
+	<!--  Doesn't work -->
+	<!--
+	<p>{{var a = 1; a + a}}</p>
+	-->
+	<!-- Multiple Delimiters -->
+	<p>{{a = 1}} remains {{a}}</p>
+	<p>{{a}} remains {{a = 1}}</p>
+
+	<!-- Ternary Operator -->
+	<p>There {{count = 1; (count == 1 ? "is " : "are ") + count}} of
+		them.</p>
+
+	<!--  Increment Operator Doesn't work -->
+	<p>{{a = 1; ++a}}</p>
+	<!--  For Loop Doesn't work -->
+	<!-- 
+	<p>{{for (i = 0; i < 10; i = i + 1) {i}}}</p>
+	 -->
+
+</body>
+
+</html>

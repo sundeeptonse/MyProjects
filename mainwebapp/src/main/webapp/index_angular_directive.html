@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="js/thirdparty/angular/1.5/angular.js"></script>
+<title>Angular JS Example</title>
+</head>
+<body ng-app>
+
+	
+	<!--  Directives
+	 	Directives are the heart and soul of Angular.
+	 	Most of the time, directives appear in the form of attributes that can be used on normal, 
+	 	familiar elements. 
+	 	The built-in directives that come pre-packaged with Angular generally start with an ng- prefix, 
+	 	which is a reference to the “ng” in Angular.
+	  	When you pass arguments to a directive, you simply use ="", 
+	  	just as you would with a normal HTML attribute. 
+	  	For example, we could pass in the name of application with ng-app="myApp". 
+	  	(The application name is actually the name of a module,
+	  	
+	  	ng-bind
+		Some directives accept and parse string expressions. 
+			(You can verify the parameters for a built-in directive by visiting its API documentation.) 
+		For example, the ng-bind directive simply renders expressions, 
+		just like the double curly brackets that we used in the previous section. 
+		This is what it looks like.  
+	  -->
+
+	<p>
+		The number <span ng-bind="3 + 4"></span>. The number <span
+			class="ng-bind:3 + 4"></span>.
+	</p>
+
+	<!--
+	With ng-init, you can initialize variables for use anywhere within the element to which it is applied.
+	-->
+	<div ng-init="sum = 3 + 2">
+		<p>
+			{{sum + 1}} is more than <span ng-bind='sum - 1'></span>
+		</p>
+	</div>
+
+	<!--  sum is not scoped -->
+	<p>Sum is {{sum}}</p>
+
+	<!-- Using semicolons to delimit statements, you can initialize as many variables as you like. -->
+	<div ng-init="count = 7; units = 'days'; collection = 'week'">
+		<p>There are {{count}} {{units}} in a {{collection}}.</p>
+	</div>
+
+	<!--  At some point, you may find it better to organize your variables as the properties of an object. -->
+	<div ng-init="time = {count: 12, units: 'months', collection: 'year'}">
+		<p>There are {{time.count}} {{time.units}} in a
+			{{time.collection}}.</p>
+	</div>
+
+
+
+	<!--  At some point, you may find it better to organize your variables as the properties of an object. -->
+	<div ng-init="months = ['January','February','March','April']">
+		<p>{{months[3]}} follows {{months[2]}} in {{months}}.</p>
+	</div>
+
+	<div
+		ng-init="paragraph = {sentence: {words: ['first','second','third']}}">
+		<p>"{{typo.sentence.words[0]}}", "{{paragraph.typo.words[1]}}",
+			"{{paragraph.sentence.typo[2]}}", "{{paragraph.sentence.words[3]}}".
+		</p>
+		<p>"{{paragraph.sentence.words[2]}}"</p>
+	</div>
+
+	<!--  Doesn't work -->
+	<!--  No, the function expression above is not allowed. 
+	While trying to process the argument to ng-init, 
+	Angular throws a $parse:syntax error that you can see in the JavaScript console of your browser. 
+	The correct place to declare functions for use in Angular expressions is within a controller, 
+	as we will learn in the upcoming Controllers chapter. 
+	In fact, controllers are the proper place to prepare application data for the view. 
+	The ng-init directive, while fun to play with in this chapter, 
+	is actually intended for aliasing variables as a way to cope with variable shadowing, 
+	as we shall see in the Collections chapter.
+	 -->
+
+	<!-- 
+	<div
+		ng-init="Person = function(name){this.name = name}; sundeep = new Person('Sundeep');">
+		<p>Sundeep Name is {{sundeep.name}}</p>
+	</div>
+
+	<div ng-init="count = function() { return 12; }">
+		<p>There are {{count()}} months in a year.</p>
+	</div>
+	
+	<div ng-init="time = new Object(); time.count = 2;">
+		<p>There are {{time.count}}</p>
+	</div>
+	-->
+
+	<!-- 
+	ng-non-bindable
+	By the way, if you need to shield some part of your document from Angular's processing, 
+	adding ng-non-bindable to an element will exclude its contents from compilation.
+ 	-->
+
+	<p ng-non-bindable>
+		{{2 * 2}} is the same as <span ng-bind='2 + 2'>?</span>
+	</p>
+
+	<p>
+		{{2 * 2}} is the same as <span ng-bind='2 + 2'>?</span>
+	</p>
+
+	<p ng-init="authorized = true">
+		The secret code is <span ng-show="authorized">0123</span> <span
+			ng-hide="authorized">not for you to see</span>
+	</p>
+
+
+</body>
+
+</html>

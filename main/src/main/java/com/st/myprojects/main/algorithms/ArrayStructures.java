@@ -9,6 +9,13 @@ package com.st.myprojects.main.algorithms;
  */
 public class ArrayStructures extends ArrayStructuresBase {
 
+	public ArrayStructures(int[] theArray){
+		super(theArray);
+	}
+	public ArrayStructures(){
+		super();
+	}
+	
 	/*
 	 * Search Algorithm's
 	 */
@@ -61,9 +68,9 @@ public class ArrayStructures extends ArrayStructuresBase {
 
 		for (int i = arraySize - 1; i > 1; i--) {
 			for (int j = 0; j < i; j++) {
-				printHorzArray(j, i);
+				//printHorzArray(j, i);
 				swapAscDesc(j, j + 1, ascending);
-				printHorzArray(j, i);
+				//printHorzArray(j, i);
 			}
 		}
 	}

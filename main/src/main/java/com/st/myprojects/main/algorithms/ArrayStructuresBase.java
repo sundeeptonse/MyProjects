@@ -22,6 +22,14 @@ public class ArrayStructuresBase {
 	protected int[] theArray = new int[maxArraySize];
 	protected int arraySize = initialArraySize;
 
+	public ArrayStructuresBase(int[] theArray) {
+		if (theArray == null) {
+			new ArrayStructuresBase();
+		}else{
+			 setTheArray(theArray);
+		}
+	}
+
 	public ArrayStructuresBase() {
 		generateRandomArray();
 	}
@@ -39,6 +47,7 @@ public class ArrayStructuresBase {
 	 */
 	public void setTheArray(int[] theArray) {
 		this.theArray = theArray;
+		this.arraySize = this.theArray.length;
 	}
 
 	private void generateRandomArray() {
@@ -55,6 +64,14 @@ public class ArrayStructuresBase {
 	public int getValueAtIndex(int arrayIndex) {
 		return arrayIndex < arraySize ? theArray[arrayIndex]
 				: Constants.INT_NEG1;
+	}
+
+	public void printArray() {
+		StringBuilder strFLine = new StringBuilder();
+		for (int i = 0; i < arraySize; i++) {
+			strFLine.append(",").append(theArray[i]);
+		}
+		System.out.println(strFLine.toString());
 	}
 
 	public void printHorzArray(int a, int b) {

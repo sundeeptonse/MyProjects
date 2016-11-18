@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.st.myprojects.main.sometests;
+package com.st.myprojects.main.problems;
 
 /**
  * @author sundeeptonse

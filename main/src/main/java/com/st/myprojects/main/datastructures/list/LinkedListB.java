@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.st.myprojects.main.datastructures;
+package com.st.myprojects.main.datastructures.list;
 
 /**
  * @author sundeeptonse

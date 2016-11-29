@@ -88,17 +88,6 @@ public class LinkedList<T> {
 		return this.firstNode;
 	}
 
-	private static class Node<T> {
-		// The data being stored in the node
-		public T data;
-		// A reference to the next node, null for last node
-		public Node<T> next;
-
-		public Node(T data) {
-			this.data = data;
-		}
-	}
-
 	public static class LinkedListUtil {
 
 		public static <T> void reverseLinkedListN(LinkedList<T> linkedList) {
@@ -110,16 +99,16 @@ public class LinkedList<T> {
 			Node<T> previous = null;
 
 			while (currentNode != null) {
-				
+
 				// Store the nextNode in a Value to be re-used later
 				nextNode = currentNode.next;
-				
+
 				// Set the Next Node to the Previous Value
 				currentNode.next = previous;
-				
+
 				// Set the Previous to the Current Node
 				previous = currentNode;
-				
+
 				// Set the Node Value to node.next
 				currentNode = nextNode;
 			}
@@ -150,18 +139,37 @@ public class LinkedList<T> {
 			node.next = null;
 		}
 
-		public static <T> void printLinkedList(LinkedList<T> linkedList) {
-			Node<T> node = linkedList.getFirstNode();
-			if (node != null) {
-				StringBuilder printString = new StringBuilder();
-				printString.append(node.data);
-				while (node.next != null) {
-					printString.append("-->").append(node.next.data);
-					node = node.next;
-				}
-				System.out.println(printString.toString());
-			}
-		}
+	}
+}
 
+class LinkedListCommonUtil {
+
+	public static <T> void printLinkedList(LinkedList<T> linkedList) {
+		Node<T> node = linkedList.getFirstNode();
+		if (node != null) {
+			StringBuilder printString = new StringBuilder();
+			printString.append(node.data);
+			while (node.next != null) {
+				printString.append("-->").append(node.next.data);
+				node = node.next;
+			}
+			System.out.println(printString.toString());
+		}
+	}
+
+}
+
+class Node<T> {
+	// The data being stored in the node
+	public T data;
+	// A reference to the next node, null for last node
+	public Node<T> next;
+
+	public Node(T data) {
+		this.data = data;
+	}
+	
+	public T getData(){
+		return this.data;
 	}
 }

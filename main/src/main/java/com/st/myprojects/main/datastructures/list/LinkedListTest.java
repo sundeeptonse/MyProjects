@@ -11,6 +11,7 @@ public class LinkedListTest {
 
 	public static void main(String... args) {
 
+		/*
 		LinkedListB list = new LinkedListB();
 		list.add(10);
 		list.add(20);
@@ -28,22 +29,37 @@ public class LinkedListTest {
 		list2.add(20);
 		list2.add(40);
 		list2.add(50);
-		LinkedList.LinkedListUtil.printLinkedList(list2);
+		LinkedListCommonUtil.printLinkedList(list2);
 		list2.addAfter(1000, 30);
-		LinkedList.LinkedListUtil.printLinkedList(list2);
+		LinkedListCommonUtil.printLinkedList(list2);
 		list2.remove(2);
-		LinkedList.LinkedListUtil.printLinkedList(list2);
+		LinkedListCommonUtil.printLinkedList(list2);
 		System.out.println("-----");
-		LinkedList.LinkedListUtil.printLinkedList(list2);
+		LinkedListCommonUtil.printLinkedList(list2);
 		System.out.println("Reverse");
 		
 		
 		LinkedList.LinkedListUtil.reverseLinkedListS(list2);
-		LinkedList.LinkedListUtil.printLinkedList(list2);
+		LinkedListCommonUtil.printLinkedList(list2);
 		
 		System.out.println("Reverse2");
 		LinkedList.LinkedListUtil.reverseLinkedListN(list2);
-		LinkedList.LinkedListUtil.printLinkedList(list2);
+		LinkedListCommonUtil.printLinkedList(list2);
+		*/
+		
+		LinkedListQ<Integer> integerLL = new LinkedListQ<>();
+		integerLL.add(1);
+		integerLL.add(2);
+		integerLL.add(3);
+		integerLL.add(4);
+		integerLL.add(5);
+		System.out.println(integerLL.removeFirst());
+		System.out.println(integerLL.removeFirst());
+		System.out.println(integerLL.removeFirst());
+		System.out.println(integerLL.removeFirst());
+		System.out.println(integerLL.removeFirst());
+		
+		LinkedListQ.LinkedListUtil.printLinkedList(integerLL);
 		
 	}
 }

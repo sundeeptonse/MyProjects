@@ -22,45 +22,42 @@ import java.util.ArrayDeque;
 public class MaxSubArray {
 
 	public static void main(String... args) {
-		int[] inputArray = { 5454, 2, 2, 3, 6, 2, 1 };
-		maxSubArrays(inputArray, 3);
-		//Utils.printArray(maxSub);
+		int[] inputArray = { 7, 2, 100, 6, 7, 1, 1 };
+		int[] outputArray = maxSubArrays(inputArray, 3);
+		// Utils.printArray(outputArray);
 	}
 
-	public static void maxSubArrays(int[] inputArray, int subArraySize) {
+	public static int[] maxSubArrays(int[] inputArray, int k) {
+		int[] op = null;
 
-		ArrayDeque<Integer> ab = new ArrayDeque<Integer>();
-		int[] arr = { 12, 1, 78, 90, 57, 89, 56 };
-		int k = 3;
-		int i;
-		for (i = 0; i < k; ++i) {
-			while (!ab.isEmpty() && arr[i] >= arr[ab.getLast()]) {
-				ab.removeLast();
+		ArrayDeque<Integer> dequeArray = new ArrayDeque<>();
+		dequeArray.push(inputArray[0]);
+		for (int i = 1; i < k; i++) {
+			Integer lastEnteredValue = dequeArray.peekFirst();
+			System.out.println("lastEnteredValue:" + lastEnteredValue
+					+ ":inputArray[i]" + inputArray[i]);
+			if (inputArray[i] > lastEnteredValue) {
+				dequeArray.pollFirst();
+				System.out.println("Adding" + inputArray[i]);
+				dequeArray.push(inputArray[i]);
 			}
-			ab.addLast(i);
-		}
-		for (; i < arr.length; ++i) {
-			System.out.print(arr[ab.getFirst()] + " ");
-			while (!ab.isEmpty() && i - k >= ab.getFirst()) {
-				ab.removeFirst();
-			}
-			while (!ab.isEmpty() && arr[i] >= arr[ab.getLast()]) {
-				ab.removeLast();
-			}
-			ab.addLast(i);
-		}
-		System.out.print(arr[ab.getFirst()]);
+			System.out.println("Adding" + inputArray[i]);
+			dequeArray.push(inputArray[i]);
 
-		/*
-		 * int[] returnArray = new int[inputArray.length]; for (int i = 0, max =
-		 * 0; i < inputArray.length; i++) {
-		 * 
-		 * returnArray[i] = inputArray[i]; if (i > 0 & subArraySize > 0) { if
-		 * ((i - subArraySize) > 0) if (inputArray[i] > returnArray[i - 1]) {
-		 * returnArray[i - 1] = inputArray[i]; } }
-		 * 
-		 * } return returnArray;
-		 */
+		}
+
+		while (!dequeArray.isEmpty()) {
+			System.out.println("de:" + dequeArray.pop());
+		}
+
+		// 5454, 4, 4
+
+		// 5454
+		// 6
+		// 7
+		// 7,7
+
+		return op;
 	}
 
 }

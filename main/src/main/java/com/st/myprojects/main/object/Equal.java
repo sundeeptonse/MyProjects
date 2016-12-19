@@ -1,5 +1,6 @@
 package com.st.myprojects.main.object;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,16 +90,51 @@ class PointWithHashCode {
 		this.y = y;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof PointWithHashCode)) {
-			return false;
-		}
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		PointWithHashCode point = (PointWithHashCode) obj;
-		return (this.x == point.x) && (this.y == point.y);
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PointWithHashCode other = (PointWithHashCode) obj;
+		if (!Arrays.equals(arrInt, other.arrInt))
+			return false;
+		if (booleanValue != other.booleanValue)
+			return false;
+		if (byteValue != other.byteValue)
+			return false;
+		if (charValue != other.charValue)
+			return false;
+		if (Double.doubleToLongBits(doubleValue) != Double
+				.doubleToLongBits(other.doubleValue))
+			return false;
+		if (Float.floatToIntBits(floatValue) != Float
+				.floatToIntBits(other.floatValue))
+			return false;
+		if (longValue != other.longValue)
+			return false;
+		if (map == null) {
+			if (other.map != null)
+				return false;
+		} else if (!map.equals(other.map))
+			return false;
+		if (objValue == null) {
+			if (other.objValue != null)
+				return false;
+		} else if (!objValue.equals(other.objValue))
+			return false;
+		if (shortValue != other.shortValue)
+			return false;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
 	}
 
 	/*
@@ -108,10 +144,29 @@ class PointWithHashCode {
 	 * @Override public int hashCode() { return 42; }
 	 */
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
-		// return HashCodeGen.hashCode(this);
-		return 42;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(arrInt);
+		result = prime * result + (booleanValue ? 1231 : 1237);
+		result = prime * result + byteValue;
+		result = prime * result + charValue;
+		long temp;
+		temp = Double.doubleToLongBits(doubleValue);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + Float.floatToIntBits(floatValue);
+		result = prime * result + (int) (longValue ^ (longValue >>> 32));
+		result = prime * result + ((map == null) ? 0 : map.hashCode());
+		result = prime * result
+				+ ((objValue == null) ? 0 : objValue.hashCode());
+		result = prime * result + shortValue;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
 	}
 
 	@Override

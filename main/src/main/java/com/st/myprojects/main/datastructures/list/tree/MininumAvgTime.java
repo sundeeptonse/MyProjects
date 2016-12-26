@@ -3,7 +3,10 @@
  */
 package com.st.myprojects.main.datastructures.list.tree;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -55,9 +58,11 @@ import java.util.Scanner;
  * 
  *         3
  *         0 3
- *         1 9
+ *         1 9 
  *         2 6
- * 
+ *         3 1
+ *         4 6
+ *         
  *         Sample Output #00 :: 9
  * 
  *         3
@@ -69,6 +74,11 @@ import java.util.Scanner;
  */
 public class MininumAvgTime {
 
+	public List<Customer> customerList = new ArrayList<>();
+
+	public PriorityQueue<Customer> customerWaitTimeList = new PriorityQueue<Customer>(
+			Customer.customerWaitTimeComparator);
+
 	public static void main(String... args) {
 		MininumAvgTime mavt = new MininumAvgTime();
 
@@ -77,51 +87,111 @@ public class MininumAvgTime {
 		for (int i = 0; i < numberofCustomers; i++) {
 			String line = input.next();
 			String[] array = line.split(" ");
-			System.out.println(line + ":" + array.length);
 			if (array.length == 2) {
 				int entryTime = Integer.parseInt(array[0]);
 				int cookTime = Integer.parseInt(array[1]);
-				mavt.addCustomerToQueue(entryTime, cookTime);
+				mavt.addCustomerToList(entryTime, cookTime);
 			}
 		}
+
+		Collections.sort(mavt.customerList,
+				Customer.customerEntryTimeCookTimeComparator);
+
+		System.out.println("Min Avg Time:" + mavt.getMinAvgTime());
 		input.close();
+	}
 
-		System.out.println(mavt.customerQueue);
+	public int getMinAvgTime() {
+		int exitTime = 0;
+
+		int minWaitTime = 0;
+		int customerSize = customerList.size();
+		System.out.println(customerList);
+
+		for (Customer customer : customerList) {
+
+			/*- 
+			 * If no more entries remaining with the exitTime
+			 * Increment the minWaitTime Time with the top of the list and keep doing so till the EntryTime > exitTime
+			 * Keep Looping through the list till the customer.entryTime is Greater
+			 */
+			while (customerWaitTimeList.size() > 0
+					&& customer.entryTime > exitTime) {
+				Customer customerWithLeastWaitTime = customerWaitTimeList
+						.poll();
+				int[] customerExitWaitTimeArray = getCustomerExitWaitTime(
+						customerWithLeastWaitTime, exitTime);
+				//Increment the Exit Time with the Exit Time in the Array
+				exitTime+=customerExitWaitTimeArray[0];
+				//Increment the Wait Time with the Wait Time in the Array
+				minWaitTime+=customerExitWaitTimeArray[1];
+			}
+
+			if (customer.entryTime <= exitTime) {
+
+				// Add Customer to the Wait Time List with the Calculated Wait
+				// Time
+				int[] customerExitWaitTimeArray = getCustomerExitWaitTime(
+						customer, exitTime);
+				exitTime+=customerExitWaitTimeArray[0];
+				customer.waitTime = customerExitWaitTimeArray[1];
+				customerWaitTimeList.add(customer);
+			}
+		}
+
+		// Now Poll with the Remaining Data Left in the WaitTime List
+		// This is already sorted with the best difference
+		while (customerWaitTimeList.size() > 0) {
+			// minWaitTime += getCustomerWaitTime(minWaitTime);
+		}
+
+		return minWaitTime / customerSize;
 
 	}
 
-	private int totalWaitTime;
-	public PriorityQueue<Customer> customerQueue = new PriorityQueue<Customer>(
-			new Comparator<Customer>() {
-				@Override
-				public int compare(Customer cust1, Customer cust2) {
-					int compareDiff = cust1.entryTime - cust2.entryTime;
-					if (compareDiff == 0) {
-						compareDiff = cust1.cookTime - cust2.cookTime;
-					}
-					return compareDiff;
-				}
-			});
+	/*-
+	 * 
+	 * 
+	 * a) If MinTime >= entryTime
+	 * example: 0 3, 4 1
+	 * Exit Time = CustomerEntryTime + CustomerCookTime = 5
+	 * 
+	 * b) If MinTime < entryTime
+	 * ExitTime = PrevExitTime + CustomerCookTime
+	 * 
+	 * b1)example: 0 3, 2 1
+	 * Exit Time : 3 + 1 = 4
+	 * 
+	 * b2)example: 0 3, 0 4
+	 * Exit Time : 3 + 4  = 7
+	 * 
+	 * Wait Time = Exit Time - Entry Time
+	 * 
+	 * a)  Wait Time =  5 - 4 = 1
+	 * b1) Wait Time =  4 - 2 = 2
+	 * b2) Wait Time =  7 - 0 = 7
+	 * 
+	 * 
+	 * */
 
-	public PriorityQueue<Customer> cookQueue = new PriorityQueue<Customer>(
-			new Comparator<Customer>() {
-				@Override
-				public int compare(Customer cust1, Customer cust2) {
-					return cust1.waitTime - cust2.waitTime;
-				}
-			});
+	public int[] getCustomerExitWaitTime(Customer customer, int prevExitTime) {
+		// Exit Time is stored at int[0]
+		// Wait Time is stored at int[1]
+		int[] exitWaitTimeArray = new int[2];
 
-	private void addCustomerToQueue(int entryTime, int cookTime) {
+		if (prevExitTime >= customer.entryTime) {
+			exitWaitTimeArray[0] = customer.entryTime + customer.cookTime;
+		} else {
+			exitWaitTimeArray[0] = prevExitTime + customer.cookTime;
+		}
+		exitWaitTimeArray[1] = customer.entryTime - exitWaitTimeArray[0];
+		return exitWaitTimeArray;
+	}
+
+	private void addCustomerToList(int entryTime, int cookTime) {
 		Customer customer = new Customer(entryTime, cookTime);
-		customerQueue.add(customer);
-	}
-
-	public void populateCookQueue(Customer customer) {
-		cookQueue.add(customer);		
-	}
-
-	public void calculateWaitTime(Customer customer) {
-
+		customerList.add(customer);
+		System.out.println(customerList.size());
 	}
 
 }
@@ -136,45 +206,21 @@ class Customer {
 
 	@Override
 	public String toString() {
-		return this.entryTime + ":" + this.cookTime + ":" + this.waitTime;
+		return "Customer [entryTime=" + entryTime + ", cookTime=" + cookTime
+				+ "]";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + cookTime;
-		result = prime * result + entryTime;
-		result = prime * result + waitTime;
-		return result;
-	}
+	public static Comparator<Customer> customerWaitTimeComparator = new Comparator<Customer>() {
+		public int compare(Customer customer1, Customer customer2) {
+			return (customer1.waitTime - customer2.waitTime);
+		}
+	};
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Customer other = (Customer) obj;
-		if (cookTime != other.cookTime)
-			return false;
-		if (entryTime != other.entryTime)
-			return false;
-		if (waitTime != other.waitTime)
-			return false;
-		return true;
-	}
-
+	public static Comparator<Customer> customerEntryTimeCookTimeComparator = new Comparator<Customer>() {
+		public int compare(Customer customer1, Customer customer2) {
+			int compareDiff = customer1.entryTime - customer2.entryTime;
+			return compareDiff == 0 ? customer1.cookTime - customer2.cookTime
+					: compareDiff;
+		}
+	};
 }

@@ -5,6 +5,8 @@ package com.st.myprojects.main.algorithms.sorting;
 
 import java.util.Comparator;
 
+import com.st.myprojects.main.util.CommonUtil;
+
 /*-
  * @author sundeeptonse
  *
@@ -27,9 +29,9 @@ public class SelectionSort extends AbstractSort {
 		// Perform till length -1, since the last index will already be the
 		// biggest
 		for (int i = 0; i < list.length; i++) {
-			int minimumIndex = findMinimumIndex(list, i, list.length,
-					comparator);
-			swap(list, i, minimumIndex);
+			int minimumIndex = CommonUtil.findMinimumIndex(list, i,
+					list.length, comparator);
+			CommonUtil.swap(list, i, minimumIndex);
 		}
 	}
 

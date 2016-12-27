@@ -18,6 +18,10 @@ public class RandomStufff {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		System.out.println("ab".compareTo("ba"));
+		System.out.println("aaa".compareTo("bbb"));
+		
 		System.out.println(2306996 & (15));
 		Object object = new Object();
 		int i;
@@ -45,6 +49,8 @@ public class RandomStufff {
 		
 		Collections.sort(integerList);
 		System.out.println(integerList);
+		
+		
 		
 	}
 

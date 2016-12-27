@@ -3,7 +3,7 @@
  */
 package com.st.myprojects.main.algorithms.sorting;
 
-import java.util.Arrays;
+
 
 /**
  * @author sundeeptonse
@@ -18,11 +18,11 @@ public class MainClass {
 		 */
 		SortingContext sortContext = new SortingContext();
 		sortContext.setSortingStrategy(new QuickSort());
-		Integer[] array = { 7, 6, 9, 4 , 11, 22, 1, 2, 3};
-		System.out.println(Arrays.toString(array));
-		sortContext.sort(array);
-		System.out.println(Arrays.toString(array));
-		
+		 //Integer[] array = { 7, 6, 9, 4 , 11, 22, 1, 2, 3};
+		Integer[] array = { 0, 1, 2, 4, 6, 5, 3 };
+
+		// System.out.println(Arrays.toString(array));
+		System.out.println(new QuickSort().findMedian(array));
 
 	}
 }

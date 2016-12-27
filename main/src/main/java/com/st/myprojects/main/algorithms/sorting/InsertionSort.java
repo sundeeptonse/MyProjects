@@ -5,6 +5,8 @@ package com.st.myprojects.main.algorithms.sorting;
 
 import java.util.Comparator;
 
+import com.st.myprojects.main.util.CommonUtil;
+
 /*-
  * @author sundeeptonse
  * 
@@ -34,7 +36,7 @@ public class InsertionSort extends AbstractSort {
 			int hole = i;
 			// If value[hole-1] > value, then move it over and decrement the
 			// value of the Hole
-			while (hole > 0 && compare(list[hole - 1], value, comparator) > 0) {
+			while (hole > 0 && CommonUtil.compare(list[hole - 1], value, comparator) > 0) {
 				list[hole] = list[hole - 1];
 				hole--;
 			}

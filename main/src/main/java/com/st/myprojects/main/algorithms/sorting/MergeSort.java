@@ -5,6 +5,8 @@ package com.st.myprojects.main.algorithms.sorting;
 
 import java.util.Comparator;
 
+import com.st.myprojects.main.util.CommonUtil;
+
 /*-
  * @author sundeeptonse
  * 
@@ -112,7 +114,7 @@ public class MergeSort extends AbstractSort {
 		i = j = k = 0;
 
 		while (i < left.length && j < right.length) {
-			if (compare(left[i], right[j], comparator) < 0) {
+			if (CommonUtil.compare(left[i], right[j], comparator) < 0) {
 				list[k++] = left[i++];
 			} else {
 				list[k++] = right[j++];
@@ -127,5 +129,52 @@ public class MergeSort extends AbstractSort {
 		while (j < right.length) {
 			list[k++] = right[j++];
 		}
+	}
+
+	/*-
+	 * Merges right list into left as long as there is enough buffer space
+	 * 
+	 * Solution: Since there is sufficient space at the end, start with the end
+	 * and go from there
+	 * 
+	 * Since the left Array is already sorted, only using the index of B will suffice
+	 * and the left over values are already sorted
+	 * 
+	 * Time Complexity : O(n)
+	 * Space Complexity : O(1)
+	 */
+
+	public <T> void merge(T[] left, T[] right) {
+		merge(left, right, null);
+	}
+
+	private <T> void merge(T[] left, T[] right, Comparator<? super T> comparator) {
+
+		int lastIndexRight = right.length - 1;
+		int lastIndexLeft = left.length - right.length - 1;
+		int indexTobeInserted = left.length - 1;
+
+		// While lastIndexRight >= 0
+		while (lastIndexRight >= 0) {
+
+			// Compare the lastValue , if value of either is greater then, move
+			// to
+			// the indexTobeInserted
+
+			// Deduct the value of indexTobeInserted
+			// Deduct the value of the Index which was moved
+
+			if (lastIndexLeft >= 0
+					&& CommonUtil.compare(left[lastIndexLeft], right[lastIndexRight], null) > 0) {
+				left[indexTobeInserted--] = left[lastIndexLeft--];
+			} else {
+				left[indexTobeInserted--] = right[lastIndexRight--];
+			}
+
+			// Repeat till the lastIndex of Right Reaches zero after which the
+			// array is sorted
+
+		}
+
 	}
 }

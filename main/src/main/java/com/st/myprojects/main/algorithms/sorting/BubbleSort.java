@@ -5,6 +5,8 @@ package com.st.myprojects.main.algorithms.sorting;
 
 import java.util.Comparator;
 
+import com.st.myprojects.main.util.CommonUtil;
+
 /*-
  * @author sundeeptonse
  * Scan over the array and compare adjacent elements.
@@ -32,8 +34,8 @@ public class BubbleSort extends AbstractSort {
 		for (int i = list.length - 1; i >= 0; i--) {
 			boolean sorted = true;
 			for (int j = 0; j < i; j++) {
-				if (compare(list, j, j + 1, comparator) > 0) {
-					swap(list, j, j + 1);
+				if (CommonUtil.compare(list, j, j + 1, comparator) > 0) {
+					CommonUtil.swap(list, j, j + 1);
 					sorted = false;
 				}
 			}

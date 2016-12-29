@@ -3,7 +3,6 @@
  */
 package com.st.myprojects.main.problems;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,8 +43,8 @@ public class Anagram {
 		if (!StringUtil.isNullOrBlank(anagramString1)
 				&& !StringUtil.isNullOrBlank(anagramString2)) {
 			if (anagramString1.length() == anagramString2.length()) {
-				if (sortChars(anagramString1).compareTo(
-						sortChars(anagramString2)) == 0) {
+				if (StringUtil.sortChars(anagramString1).compareTo(
+						StringUtil.sortChars(anagramString2)) == 0) {
 					isAnagram = true;
 				}
 			}
@@ -53,11 +52,7 @@ public class Anagram {
 		return isAnagram;
 	}
 
-	public final static String sortChars(String s) {
-		char[] content = s.toCharArray();
-		Arrays.sort(content);
-		return new String(content);
-	}
+	
 
 	/*-
 	 * Compares the frequency Distribution of the Maps and returns back
@@ -251,7 +246,7 @@ public class Anagram {
 			Integer value2 = compareMap.containsKey(key) ? compareMap.get(key)
 					: 0;
 			int difference = value1 - value2;
-			if (difference >= 0) {
+			if (difference > 0) {
 				frequencyAnalysis += difference;
 			}
 		}

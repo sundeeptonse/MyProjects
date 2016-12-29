@@ -3,9 +3,6 @@
  */
 package com.st.myprojects.main.problems;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 /**
  * @author sundeeptonse

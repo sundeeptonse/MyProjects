@@ -9,38 +9,82 @@ package com.st.myprojects.main.bitmanipulators;
  * it can be applied to any of the integral types, making every "0" a "1" and every "1" a "0". 
  * For example, a byte contains 8 bits; applying this operator to a value whose bit pattern is "00000000" would change its pattern to "11111111".
 
- * The signed left shift operator "<<" shifts a bit pattern to the left, 
- * and the signed right shift operator ">>" shifts a bit pattern to the right. 
- * The bit pattern is given by the left-hand operand, and the number of positions to shift by the right-hand operand. 
- * The unsigned right shift operator ">>>" shifts a zero into the leftmost position, 
- * while the leftmost position after ">>" depends on sign extension.
-
+ * Arithmetic(>>) vs Logical(>>>)
+ * Arithmetic -- Doesn't erase the Signed Bit, retains and considers it while right shifting
+ * Arithmetic -- Doesn't erase the Signed Bit, retains it while lefts shifting after all the bits are shifted 
+ * 
+ * Logical Right --> Doesn't erase the Signed Bit, retains and doesn't consider it while right shifting
+ * No Left Shifting logical Right
+ * 
  * The bitwise & operator performs a bitwise AND operation.
-
  * The bitwise ^ operator performs a bitwise exclusive OR operation.
-
  * The bitwise | operator performs a bitwise inclusive OR operation.
-
+ * 
+ * 0x--> Radix Prefix
+ * Hex Literal 0xFF
+ * Stands for the below Integer
+ * 00000000 00000000 00000000 11111111
+ * 
+ * Hex Literal 0xFFFFFFFF
+ * Stands for the below Integer
+ * 11111111 11111111 11111111 11111111, which is -1
+ * 
+ * Hex Literal 0x7FFFFFFF
+ * Stands for the below Integer
+ * 01111111 11111111 11111111 11111111, which is Max Integer -> 2 power 31 -1
+ * 
+ * 0x80000000
+ * 10000000 00000000 00000000 00000000, which is Min Integer --> - 2 power 31
+ * 
+ * Binary Representation
+ * * 0b11010;
+ * -0b1  = -1 , 111111
+ * 
+ * Int|Float : 32 bits
+ * Long|Double :: 64 bits
+ * 
+ * For Long/Double :
+ * long longV = 0xFFFFFFFFFFFFFFFFL;
+ * double double = 0xFFFFFFFFFFFFFFFFd; --> Doesn't work, so won't float
 
  * */
 public class ShiftOps {
 
 	public static void main(String... args) {
-		long value = 222;
-		System.out.println((int) value >>> 32);
 
-		int bitmask = 0x000F;
-		System.out.println(bitmask);
-		int val = 0x2222;
-		// prints "2"
-		System.out.println(val & bitmask);
-
-		for (int i = 0; i < 10; i++) {
-			System.out.printf("1<< %d : %d\n", i, (1 << i));
-			System.out.printf("1>> %d : %d\n", i, (1 >> i));
-
-		}
+		
 
 	}
+	
+	public static  void arithmeticLogicTest(){
+		for (int i = 0; i < 40; i++) {
+			int value = 1 << i;
+			System.out.println("Number:" + value + ":HexRepresentation:"
+					+ Integer.toBinaryString(value));
+		}
 
+		System.out.println("---Arithmetic Right ---");
+
+		for (int i = 0; i < 32; i++) {
+			int value = 0x80000000 >> i;
+			System.out.println("Number:" + value + ":HexRepresentation:"
+					+ Integer.toBinaryString(value));
+		}
+
+		System.out.println("---Arithmetic Left---");
+
+		for (int i = 0; i < 32; i++) {
+			int value = -0b1 << i;
+			System.out.println("Number:" + value + ":HexRepresentation:"
+					+ Integer.toBinaryString(value));
+		}
+		System.out.println("---Logical Right ---");
+
+		for (int i = 0; i < 32; i++) {
+			int value = 0x80000000 >>> i;
+			System.out.println("Number:" + value + ":HexRepresentation:"
+					+ Integer.toBinaryString(value));
+		}
+	}
+	
 }

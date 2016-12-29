@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.st.myprojects.main.algorithms.sorting.QuickSort;
 import com.st.myprojects.main.datatypes.collections.HashMapList;
+import com.st.myprojects.main.util.StringUtil;
 
 /*-
  * 
@@ -19,8 +20,8 @@ public class GroupAnagrams {
 
 	public static Comparator<String> anagramComparator = new Comparator<String>() {
 		public int compare(String string1, String string2) {
-			return Anagram.sortChars(string1).compareTo(
-					Anagram.sortChars(string2));
+			return StringUtil.sortChars(string1).compareTo(
+					StringUtil.sortChars(string2));
 		}
 	};
 
@@ -45,7 +46,7 @@ public class GroupAnagrams {
 
 		HashMapList<String, String> hashMapList = new HashMapList<>();
 		for (String s : array) {
-			String key = Anagram.sortChars(s);
+			String key = StringUtil.sortChars(s);
 			hashMapList.put(key, s);
 		}
 

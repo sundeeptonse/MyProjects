@@ -14,6 +14,9 @@ package com.st.myprojects.main.datastructures.list.array;
  */
 public class CircularArray<E> {
 
+	public static void main(String... args) {
+		
+	}
 	private Object[] a;
 	private int size;
 

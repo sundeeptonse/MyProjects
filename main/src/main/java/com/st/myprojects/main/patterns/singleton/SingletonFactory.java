@@ -10,89 +10,97 @@ import com.st.myprojects.main.util.DateUtil;
 import com.st.myprojects.main.util.DateUtil.Time;
 
 public class SingletonFactory {
-	
-	private static volatile Map<Class<?>,Object> singletonMap = new ConcurrentHashMap<>();
+
+	private static volatile Map<Class<?>, Object> singletonMap = new ConcurrentHashMap<>();
 	private static boolean stats = false;
 	private static Time statsTime = Time.ms;
-	
-	private enum Message{
-		NULL("Class Type can't be null"),
-		CREATIONFAILED("Unable to Create the Singleton Object Successfully"),
-		PRIVATECONST("Singleton can't have any non-private Constructors");
+
+	private enum Message {
+		NULL("Class Type can't be null"), CREATIONFAILED(
+				"Unable to Create the Singleton Object Successfully"), PRIVATECONST(
+				"Singleton can't have any non-private Constructors");
 		String message;
-		Message(String pMessage){
+
+		Message(String pMessage) {
 			this.message = pMessage;
 		}
 	}
-	
-	private SingletonFactory(){
+
+	private SingletonFactory() {
 	};
-	
-	public static final <T> T getSingletonInstance(Class<T> classType) throws SingletonCreationException{
-		//Date to Measure Performance
+
+	public static final <T> T getSingletonInstance(Class<T> classType)
+			throws SingletonCreationException {
+		// Date to Measure Performance
 		long time = System.nanoTime();
-		
-		if(classType == null){
+
+		if (classType == null) {
 			throw new NullPointerException(Message.NULL.message);
 		}
 		Object singletonObj = singletonMap.get(classType);
-		
-		//DOUBLE - CHECKED 
-		if(singletonObj == null){
-			try{
-				//Check if Class Matches Expectations
+
+		// DOUBLE - CHECKED
+		if (singletonObj == null) {
+			try {
+				// Check if Class Matches Expectations
 				validateClass(classType);
-				//Call the Declared Constructor
-				Constructor<T> constructor =  classType.getDeclaredConstructor();
-				
-				//Override it
+				// Call the Declared Constructor
+				Constructor<T> constructor = classType.getDeclaredConstructor();
+
+				// Override it
 				constructor.setAccessible(true);
-				//Generate Instance on a Synchronized Block
+				// Generate Instance on a Synchronized Block
 				synchronized (SingletonFactory.class) {
-					//Double Check to Avoid Race Condition
+					// Double Check to Avoid Race Condition
 					singletonObj = singletonMap.get(classType);
-					if(singletonObj == null){
+					if (singletonObj == null) {
 						singletonObj = constructor.newInstance();
-					
+
 					}
-					//Put Instance into the Concurrent Map
-					singletonMap.put(classType,singletonObj);					
+					// Put Instance into the Concurrent Map
+					singletonMap.put(classType, singletonObj);
 				}
-				if(singletonObj == null){
-					throw new SingletonCreationException(Message.CREATIONFAILED.message);
+				if (singletonObj == null) {
+					throw new SingletonCreationException(
+							Message.CREATIONFAILED.message);
 				}
-			}catch(NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException ex){
+			} catch (NoSuchMethodException | IllegalAccessException
+					| InstantiationException | InvocationTargetException ex) {
 				throw new SingletonCreationException(new Throwable(ex));
 			}
 		}
-		if(stats){
+		if (stats) {
 			DateUtil.printTimeDifference(time, statsTime);
 		}
 		return classType.cast(singletonObj);
 	}
-	
-	public static void setStats(boolean pStats, Time pTime){
+
+	public static void setStats(boolean pStats, Time pTime) {
 		stats = pStats;
 		statsTime = pTime;
 	}
-	
-	
-	private static <T> void validateClass(Class<T> classType) throws SingletonCreationException{
+
+	private static <T> void validateClass(Class<T> classType)
+			throws SingletonCreationException {
 		Constructor<?>[] constructorArr = classType.getDeclaredConstructors();
-		for(Constructor<?> constructor : constructorArr){
-			if(constructor.getModifiers() != Modifier.PRIVATE){
-				throw new SingletonCreationException(Message.PRIVATECONST.message);
+		for (Constructor<?> constructor : constructorArr) {
+			if (constructor.getModifiers() != Modifier.PRIVATE) {
+				throw new SingletonCreationException(
+						Message.PRIVATECONST.message);
 			}
 		}
 	}
 
 }
 
-
-class SingletonCreationException extends Exception  {
+class SingletonCreationException extends Exception {
 	private static final long serialVersionUID = -2965779113260499613L;
-	public SingletonCreationException(String message){	super(message); }
-	public SingletonCreationException(Throwable cause){  super(cause); }
+
+	public SingletonCreationException(String message) {
+		super(message);
+	}
+
+	public SingletonCreationException(Throwable cause) {
+		super(cause);
+	}
 }
-
-

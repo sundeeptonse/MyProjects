@@ -4,6 +4,11 @@
 package com.st.myprojects.main.datastructures.list.tree;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import com.st.myprojects.main.util.CommonUtil;
 
 /*-
  * @author sundeeptonse
@@ -19,8 +24,7 @@ import java.util.ArrayDeque;
  *  log(n)
  *
  */
-public class BinarySearchTree<E extends Number & Comparable<E>> implements
-		TreeI<E> {
+public class BinarySearchTree<E extends Comparable<E>> implements TreeI<E> {
 
 	private BstNode<E> root;
 
@@ -62,9 +66,11 @@ public class BinarySearchTree<E extends Number & Comparable<E>> implements
 
 		// If Node is null, return null
 		if (node != null) {
-			if (data.compareTo(node.data) > 0) {
+
+			int compareValue = CommonUtil.compare(data, node.data, null);
+			if (compareValue > 0) {
 				node.right = delete(node.right, data);
-			} else if (data.compareTo(node.data) < 0) {
+			} else if (compareValue < 0) {
 				node.left = delete(node.left, data);
 			} else {
 				// Node data Matches
@@ -113,7 +119,8 @@ public class BinarySearchTree<E extends Number & Comparable<E>> implements
 				// Walking the Line till the Current Node
 				while (ancestor != currentNode) {
 					// If Current Node is Greater than the Ancestor, go right
-					if (currentNode.compare(ancestor) > 0) {
+					if (CommonUtil.compare(currentNode.data, ancestor.data,
+							null) > 0) {
 						ancestor = ancestor.right;
 					} else {
 						// This will store the Value if we taking a left,
@@ -138,7 +145,8 @@ public class BinarySearchTree<E extends Number & Comparable<E>> implements
 	private BstNode<E> findNode(BstNode<E> node, E data) {
 		BstNode<E> returnNode = null;
 		if (node != null) {
-			int compare = node.compare(data);
+			int compare = CommonUtil.compare(node.data, data, null);
+
 			if (compare > 0) {
 				returnNode = findNode(node.left, data);
 			} else if (compare < 0) {
@@ -148,6 +156,95 @@ public class BinarySearchTree<E extends Number & Comparable<E>> implements
 			}
 		}
 		return returnNode;
+	}
+
+	public static class Result<E extends Comparable<E>> {
+		BstNode<E> node;
+		boolean isAncestor;
+
+		public Result() {
+			this(null, false);
+		}
+
+		public Result(BstNode<E> node) {
+			this(node, false);
+		}
+
+		public Result(BstNode<E> node, boolean isAncestor) {
+			this.node = node;
+			this.isAncestor = isAncestor;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			return node + ":" + isAncestor;
+		}
+	}
+
+	public E findCommonAncestor(E data1, E data2) {
+		Result<E> result = findCommonAncestorHelper(this.root, data1, data2);
+		return result != null && result.node != null
+				&& result.node.data != null && result.isAncestor ? result.node.data
+				: null;
+	}
+
+	public Result<E> findCommonAncestorHelper(BstNode<E> node, E data1, E data2) {
+
+		Result<E> result = new Result<>();
+		if (node != null) {
+
+			int compareData1 = CommonUtil.compare(node.data, data1);
+			int compareData2 = CommonUtil.compare(node.data, data2);
+
+			// If the node equals both a and b, return the same node with the
+			// same value as ancestor
+			if (compareData1 == 0 && compareData2 == 0) {
+				result = new Result<>(node, true);
+			} else {
+				// If Not,
+				// Go Left
+				Result<E> leftResult = findCommonAncestorHelper(node.left,
+						data1, data2);
+
+				if (leftResult.isAncestor) {
+					return leftResult;
+				}
+
+				// If Not,
+				// Go Left
+				Result<E> rightResult = findCommonAncestorHelper(node.right,
+						data1, data2);
+
+				if (rightResult.isAncestor) {
+					return rightResult;
+				}
+
+				if (leftResult.node != null && rightResult.node != null) {
+					result = new Result<>(node, true);
+				} else if (compareData1 == 0 || compareData2 == 0) {
+
+					// If I'm at the either of the two values,
+					// If there is a node below me
+					// Then I'm the Ancestor
+					boolean isAncestor = leftResult.node != null
+							|| rightResult.node != null;
+					result = new Result<>(node, isAncestor);
+				} else {
+					// Else
+					result = rightResult.node != null ? rightResult
+							: leftResult;
+				}
+			}
+		}
+
+		System.out.println("Node:" + (node != null ? node.data : null)
+				+ ",Data1:" + data1 + ",Data2:" + data2 + ",result:" + result);
+		return result;
 	}
 
 	/*
@@ -218,6 +315,43 @@ public class BinarySearchTree<E extends Number & Comparable<E>> implements
 		}
 	}
 
+	/*
+	 * Create Linked List of Levels
+	 */
+	public List<LinkedList<BstNode<E>>> getLevelOrderLinkedList() {
+		// Create an Array List of LinkedList
+		List<LinkedList<BstNode<E>>> list = new ArrayList<>();
+		if (root != null) {
+
+			// Put into Queue
+			ArrayDeque<BstNode<E>> queue = new ArrayDeque<>();
+			queue.add(root);
+			LinkedList<BstNode<E>> resultLevel;
+
+			while (!queue.isEmpty()) {
+
+				ArrayDeque<BstNode<E>> parentQueue = queue;
+				queue = new ArrayDeque<>();
+				resultLevel = new LinkedList<>();
+
+				while (!parentQueue.isEmpty()) {
+					BstNode<E> currentNode = parentQueue.pollFirst();
+					resultLevel.add(currentNode);
+					if (currentNode.left != null) {
+						queue.add(currentNode.left);
+					}
+					if (currentNode.right != null) {
+						queue.add(currentNode.right);
+					}
+				}
+
+				list.add(resultLevel);
+			}
+		}
+
+		return list;
+	}
+
 	public enum Order {
 		PREORDER, POSTORDER, INORDER
 	}
@@ -250,19 +384,23 @@ public class BinarySearchTree<E extends Number & Comparable<E>> implements
 	private void printDepthFirst(BstNode<E> node, Order orderType) {
 		if (node != null) {
 			if (orderType.equals(Order.PREORDER)) {
-				System.out.print(node.data + " ");
+				visit(node);
 				printDepthFirst(node.left, orderType);
 				printDepthFirst(node.right, orderType);
 			} else if (orderType.equals(Order.POSTORDER)) {
 				printDepthFirst(node.left, orderType);
 				printDepthFirst(node.right, orderType);
-				System.out.print(node.data + " ");
+				visit(node);
 			} else if (orderType.equals(Order.INORDER)) {
 				printDepthFirst(node.left, orderType);
-				System.out.print(node.data + " ");
+				visit(node);
 				printDepthFirst(node.right, orderType);
 			}
 		}
+	}
+
+	private void visit(BstNode<E> node) {
+		System.out.print(node.data + " ");
 	}
 
 	private BstNode<E> insert(BstNode<E> node, E data) {
@@ -275,7 +413,7 @@ public class BinarySearchTree<E extends Number & Comparable<E>> implements
 
 		if (node == null) {
 			node = getNewNode(data);
-		} else if (node.compare(data) <= 0) {
+		} else if (CommonUtil.compare(node.data, data, null) <= 0) {
 			node.right = insert(node.right, data);
 		} else {
 			node.left = insert(node.left, data);
@@ -295,11 +433,14 @@ class BstNode<E extends Comparable<E>> {
 	E data;
 	BstNode<E> left, right;
 
-	public int compare(BstNode<E> b) throws ClassCastException {
-		return this.data.compareTo(b.data);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return data.toString();
 	}
 
-	public int compare(E data) throws ClassCastException {
-		return this.data.compareTo(data);
-	}
 }

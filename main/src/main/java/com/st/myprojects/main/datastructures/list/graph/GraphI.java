@@ -44,6 +44,10 @@ package com.st.myprojects.main.datastructures.list.graph;
  *  Simple Path : A walk where no vertices and thus no edges are repeated
  *  Trail : a walk where no edges are repeated
  *  
+ *  Two ways to represent a graph
+ *  : Adjacency List
+ *  : Adjacency Matrix
+ *  
  */
 public interface GraphI {
 

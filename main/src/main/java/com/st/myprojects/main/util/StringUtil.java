@@ -110,7 +110,7 @@ public class StringUtil {
 			return "";
 		}
 		char[] charArray = string.toCharArray();
-		Arrays.sort(charArray);
+		Arrays.parallelSort(charArray);
 		return new String(charArray);
 	}
 
@@ -252,7 +252,7 @@ public class StringUtil {
 	public static void replace(String originalString, String string1,
 			String string2) {
 	}
-	
+
 	/*-
 	 * Checks to see if two Strings are rotated
 	 * Example: Sundeep deepSun psundee
@@ -260,7 +260,7 @@ public class StringUtil {
 
 	public static boolean checkIfRotated(String string1, String string2) {
 		boolean rotated = false;
-		
+
 		return rotated;
 	}
 

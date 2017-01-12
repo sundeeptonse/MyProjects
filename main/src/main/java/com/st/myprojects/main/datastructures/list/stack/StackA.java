@@ -3,11 +3,12 @@
  */
 package com.st.myprojects.main.datastructures.list.stack;
 
+import java.util.NoSuchElementException;
+
 /**
  * @author sundeeptonse Array Implementation
  * 
- * Need to add resizing i/p's
- * Need to implement List
+ *         Need to add resizing i/p's Need to implement List
  * 
  */
 public class StackA<E> implements StackI<E> {
@@ -46,11 +47,11 @@ public class StackA<E> implements StackI<E> {
 	@SuppressWarnings("unchecked")
 	private E peek(int index) {
 		if (size() >= 0) {
-			return (E) elementData[index];	
-		}else{
-			return null;
+			return (E) elementData[index];
+		} else {
+			throw new NoSuchElementException();
 		}
-		
+
 	}
 
 	/*
@@ -70,8 +71,7 @@ public class StackA<E> implements StackI<E> {
 	public int size() {
 		return top;
 	}
-	
-	
+
 	/*
 	 * 
 	 * @see com.st.myprojects.main.datastructures.stack.StackI#isEmpty()
@@ -80,7 +80,5 @@ public class StackA<E> implements StackI<E> {
 	public boolean isEmpty() {
 		return size() < 0 ? false : true;
 	}
-	
-	
 
 }

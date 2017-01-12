@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import com.st.myprojects.main.util.CommonUtil;
+
 /*-
  * @author sundeeptonse
  * 
@@ -99,48 +101,36 @@ public class Heap<E> {
 	}
 
 	// If Parent Value is greater than last Index Value, then swap
-	@SuppressWarnings("unchecked")
 	private void heapifyUp() {
 		int currentIndex = getLastElementIndex();
-		Comparable<? super E> currentIndexKey = (Comparable<? super E>) heap
-				.get(currentIndex);
-
 		while (hasParent(currentIndex)
-				&& currentIndexKey.compareTo(getParent(currentIndex)) < 0) {
+				&& CommonUtil.compare(heap.get(currentIndex),
+						getParent(currentIndex), comparator) < 0) {
 			int parentIndex = getParentIndex(currentIndex);
 			// If Current index < Parent, then Swap
 			swap(currentIndex, parentIndex);
-
 			currentIndex = parentIndex;
-			currentIndexKey = (Comparable<? super E>) heap.get(currentIndex);
 		}
 	}
-	
-	/*
-	 * Comparator vs Comparable Need to be added in
-	 * */
 
-	@SuppressWarnings("unchecked")
 	private void heapifyDown() {
 		int currentIndex = 0;
 
 		while (hasLeftChild(currentIndex)) {
 			int smallerChildIndex = getLeftChildIndex(currentIndex);
-			Comparable<? super E> smallerChildIndexKey = (Comparable<? super E>) heap
-					.get(smallerChildIndex);
 
 			// If Right is Smaller, then store the value in the
 			// smallerChildIndex
+
 			if (hasRightChild(currentIndex)
-					&& smallerChildIndexKey
-							.compareTo(getRightChild(currentIndex)) < 0) {
+					&& CommonUtil.compare(heap.get(smallerChildIndex),
+							getRightChild(currentIndex), comparator) < 0) {
 				smallerChildIndex = getRightChildIndex(currentIndex);
-				smallerChildIndexKey = (Comparable<? super E>) heap
-						.get(smallerChildIndex);
 			}
 
 			// If Current Index is bigger than the child, then swap, else break
-			if (smallerChildIndexKey.compareTo(heap.get(currentIndex)) < 0) {
+			if (CommonUtil.compare(heap.get(smallerChildIndex),
+					heap.get(currentIndex), comparator) < 0) {
 				swap(smallerChildIndex, currentIndex);
 				currentIndex = smallerChildIndex;
 			} else {

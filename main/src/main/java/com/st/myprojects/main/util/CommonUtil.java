@@ -27,6 +27,12 @@ public class CommonUtil {
 		list[index1] = list[index2];
 		list[index2] = temp;
 	}
+	
+	public static  void swapCh(char[] list, int index1, int index2) {
+		char temp = list[index1];
+		list[index1] = list[index2];
+		list[index2] = temp;
+	}
 
 
 	public static <T> int compare(T value1, T value2) {

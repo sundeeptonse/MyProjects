@@ -3,7 +3,9 @@
  */
 package com.st.myprojects.main.datastructures.list.tree;
 
+import java.net.CookieHandler;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -74,130 +76,126 @@ import java.util.Scanner;
  */
 public class MininumAvgTime {
 
-	public List<Customer> customerList = new ArrayList<>();
-
-	public PriorityQueue<Customer> customerWaitTimeList = new PriorityQueue<Customer>(
-			Customer.customerWaitTimeComparator);
-
 	public static void main(String... args) {
-		MininumAvgTime mavt = new MininumAvgTime();
+		Scanner in = new Scanner(System.in);
+		int totalSize = in.nextInt();
 
-		Scanner input = new Scanner(System.in).useDelimiter("\\n");
-		int numberofCustomers = input.nextInt();
-		for (int i = 0; i < numberofCustomers; i++) {
-			String line = input.next();
-			String[] array = line.split(" ");
-			if (array.length == 2) {
-				int entryTime = Integer.parseInt(array[0]);
-				int cookTime = Integer.parseInt(array[1]);
-				mavt.addCustomerToList(entryTime, cookTime);
+		List<Customer> customerList = new ArrayList<>(totalSize);
+		in.nextLine();
+		while (totalSize > 0) {
+			Customer customer = new Customer(in.nextInt(), in.nextInt());
+			customerList.add(customer);
+			totalSize--;
+		}
+
+		System.out.println(customerList.toString());
+
+		System.out.println(getMinAvgTime(customerList));
+
+	}
+
+	public static int getMinAvgTime(List<Customer> customerList) {
+
+		PriorityQueue<Customer> pq = new PriorityQueue<>(
+				Customer.waitTimeComparator);
+
+		customerList.sort(Customer.entryTimeComparator);
+		// Initialize the Entry Time with the first users Time
+		int totalTimeWaitTime = 0;
+		int currentTime = 0;
+
+		List<Customer> tempList = new ArrayList<>();
+
+		for (int i = 0; i < customerList.size();) {
+			Customer customer = customerList.get(i);
+			int entryTime = customer.entryTime;
+			System.out.println("Current Customer" + customer + ":Current Time:"
+					+ currentTime + ":Total Wait Time: " + totalTimeWaitTime);
+
+			if (entryTime <= currentTime) {
+				// Add to the tempList
+				tempList.add(customer);
+				i++;
+			} else {
+				// Process the Temp List by Emptying it into the PQ
+				pq.addAll(tempList);
+				if (pq.size() > 0) {
+					// Get the Top Most Element, i.e the one with the least Wait
+					// Time
+					Customer minWaitTimeCustomer = pq.poll();
+					int waitTime = minWaitTimeCustomer.cookTime
+							- minWaitTimeCustomer.entryTime;
+
+					// Increment the total Wait Time
+					totalTimeWaitTime += waitTime;
+
+					System.out.println("Customer:" + minWaitTimeCustomer + ":waitTime:"
+							+ waitTime + ":TotalWaitTime:" + totalTimeWaitTime);
+
+					// Increment the current time as well
+					currentTime += waitTime;
+
+					if (pq.size() > 0) {
+						// Fill up the TempList with the Rest of the Customers
+						tempList = new ArrayList<>(pq);
+					}
+				} else {
+					// If size is 0 and we have entered here, it means that the
+					// entryTime isn't sufficient
+
+					// So we get the next in loop
+					if (i + 1 < customerList.size()) {
+						// Increase the Current Time
+						currentTime += customerList.get(i + 1).entryTime;
+						i++;
+					}
+				}
 			}
 		}
 
-		Collections.sort(mavt.customerList,
-				Customer.customerEntryTimeCookTimeComparator);
+		// After all this, if we have any elements in the tempList, process them
+		pq.addAll(tempList);
+		while (pq.size() > 0) {
+			// Get the Top Most Element, i.e the one with the least Wait
+			// Time
+			Customer customer = pq.poll();
+			int waitTime = customer.cookTime - customer.entryTime;
 
-		System.out.println("Min Avg Time:" + mavt.getMinAvgTime());
-		input.close();
-	}
+			// Increment the total Wait Time
+			totalTimeWaitTime += waitTime;
 
-	public int getMinAvgTime() {
-		int exitTime = 0;
+			System.out.println("Customer:" + customer + ":waitTime:"
+					+ waitTime + ":TotalWaitTime:" + totalTimeWaitTime);
+			
+			// Increment the current time as well
+			currentTime += waitTime;
 
-		int minWaitTime = 0;
-		int customerSize = customerList.size();
-		System.out.println(customerList);
-
-		for (Customer customer : customerList) {
-
-			/*- 
-			 * If no more entries remaining with the exitTime
-			 * Increment the minWaitTime Time with the top of the list and keep doing so till the EntryTime > exitTime
-			 * Keep Looping through the list till the customer.entryTime is Greater
-			 */
-			while (customerWaitTimeList.size() > 0
-					&& customer.entryTime > exitTime) {
-				Customer customerWithLeastWaitTime = customerWaitTimeList
-						.poll();
-				int[] customerExitWaitTimeArray = getCustomerExitWaitTime(
-						customerWithLeastWaitTime, exitTime);
-				//Increment the Exit Time with the Exit Time in the Array
-				exitTime+=customerExitWaitTimeArray[0];
-				//Increment the Wait Time with the Wait Time in the Array
-				minWaitTime+=customerExitWaitTimeArray[1];
-			}
-
-			if (customer.entryTime <= exitTime) {
-
-				// Add Customer to the Wait Time List with the Calculated Wait
-				// Time
-				int[] customerExitWaitTimeArray = getCustomerExitWaitTime(
-						customer, exitTime);
-				exitTime+=customerExitWaitTimeArray[0];
-				customer.waitTime = customerExitWaitTimeArray[1];
-				customerWaitTimeList.add(customer);
+			if (pq.size() > 0) {
+				// Fill up the TempList with the Rest of the Customers
+				tempList = new ArrayList<>(pq);
 			}
 		}
 
-		// Now Poll with the Remaining Data Left in the WaitTime List
-		// This is already sorted with the best difference
-		while (customerWaitTimeList.size() > 0) {
-			// minWaitTime += getCustomerWaitTime(minWaitTime);
-		}
-
-		return minWaitTime / customerSize;
-
+		return totalTimeWaitTime / customerList.size();
 	}
-
-	/*-
-	 * 
-	 * 
-	 * a) If MinTime >= entryTime
-	 * example: 0 3, 4 1
-	 * Exit Time = CustomerEntryTime + CustomerCookTime = 5
-	 * 
-	 * b) If MinTime < entryTime
-	 * ExitTime = PrevExitTime + CustomerCookTime
-	 * 
-	 * b1)example: 0 3, 2 1
-	 * Exit Time : 3 + 1 = 4
-	 * 
-	 * b2)example: 0 3, 0 4
-	 * Exit Time : 3 + 4  = 7
-	 * 
-	 * Wait Time = Exit Time - Entry Time
-	 * 
-	 * a)  Wait Time =  5 - 4 = 1
-	 * b1) Wait Time =  4 - 2 = 2
-	 * b2) Wait Time =  7 - 0 = 7
-	 * 
-	 * 
-	 * */
-
-	public int[] getCustomerExitWaitTime(Customer customer, int prevExitTime) {
-		// Exit Time is stored at int[0]
-		// Wait Time is stored at int[1]
-		int[] exitWaitTimeArray = new int[2];
-
-		if (prevExitTime >= customer.entryTime) {
-			exitWaitTimeArray[0] = customer.entryTime + customer.cookTime;
-		} else {
-			exitWaitTimeArray[0] = prevExitTime + customer.cookTime;
-		}
-		exitWaitTimeArray[1] = customer.entryTime - exitWaitTimeArray[0];
-		return exitWaitTimeArray;
-	}
-
-	private void addCustomerToList(int entryTime, int cookTime) {
-		Customer customer = new Customer(entryTime, cookTime);
-		customerList.add(customer);
-		System.out.println(customerList.size());
-	}
-
 }
 
 class Customer {
-	int entryTime, cookTime, waitTime;
+	int entryTime, cookTime;
+
+	public static Comparator<Customer> entryTimeComparator = new Comparator<Customer>() {
+		@Override
+		public int compare(Customer o1, Customer o2) {
+			return o1.entryTime - o2.entryTime;
+		}
+	};
+
+	public static Comparator<Customer> waitTimeComparator = new Comparator<Customer>() {
+		@Override
+		public int compare(Customer o1, Customer o2) {
+			return (o1.entryTime - o1.cookTime) - (o2.entryTime - o2.cookTime);
+		}
+	};
 
 	Customer(int entryTime, int cookTime) {
 		this.entryTime = entryTime;
@@ -210,17 +208,4 @@ class Customer {
 				+ "]";
 	}
 
-	public static Comparator<Customer> customerWaitTimeComparator = new Comparator<Customer>() {
-		public int compare(Customer customer1, Customer customer2) {
-			return (customer1.waitTime - customer2.waitTime);
-		}
-	};
-
-	public static Comparator<Customer> customerEntryTimeCookTimeComparator = new Comparator<Customer>() {
-		public int compare(Customer customer1, Customer customer2) {
-			int compareDiff = customer1.entryTime - customer2.entryTime;
-			return compareDiff == 0 ? customer1.cookTime - customer2.cookTime
-					: compareDiff;
-		}
-	};
 }

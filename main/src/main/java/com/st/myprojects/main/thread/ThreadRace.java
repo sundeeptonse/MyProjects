@@ -3,6 +3,7 @@
  */
 package com.st.myprojects.main.thread;
 
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +11,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.st.myprojects.main.thread.ThreadSafety.ThreadSafe;
+import com.st.myprojects.main.util.DateUtil;
+import com.st.myprojects.main.util.DateUtil.Time;
 
 /*-
  * @author sundeeptonse
@@ -28,7 +30,18 @@ import com.st.myprojects.main.thread.ThreadSafety.ThreadSafe;
 public class ThreadRace {
 
 	public static void main(String... args) {
-		RaceCondition.testRaceMethod();
+
+		long timeInNano = System.nanoTime();
+		RaceCondition.testRaceMethod(false);
+		long timeA = DateUtil.getTimeDifference(timeInNano, Time.ns);
+		System.out.println(timeA);
+
+		/*
+		 * long timeInNano = System.nanoTime();
+		 * RaceCondition.testRaceMethod(true); long timeB =
+		 * DateUtil.getTimeDifference(timeInNano, Time.ms);
+		 * System.out.println(timeB);
+		 */
 
 	}
 }
@@ -67,6 +80,7 @@ public class ThreadRace {
 class RaceCondition {
 	@SuppressWarnings("rawtypes")
 	static Counter rc;
+	static boolean useFJ = false;
 
 	static abstract class Counter<T> {
 		T count;
@@ -130,7 +144,8 @@ class RaceCondition {
 		}
 	}
 
-	static void testRaceMethod() {
+	static void testRaceMethod(boolean forkJoin) {
+		useFJ = forkJoin;
 		rc = new RaceCounter();
 		createAndExecuteThreads();
 		System.out.println("Count is:" + rc.count);
@@ -149,18 +164,38 @@ class RaceCondition {
 	}
 
 	static void createAndExecuteThreads() {
-		int count = 1_000;
-		// Schedule Thread to run after 10 second
-		ScheduledExecutorService execService = Executors
-				.newScheduledThreadPool(count);
-		long delay = 3_000;
-		for (int i = 0; i < count; i++) {
-			Thread rct = new Thread(new RaceCounterThread());
-			execService.schedule(rct, delay, TimeUnit.MILLISECONDS);
+		int count = 1_000_000;
+		if (useFJ) {
+			// Schedule Thread to run after 10 second
+			ExecutorService execService = Executors.newWorkStealingPool();
+			for (int i = 0; i < count; i++) {
+				Thread rct = new Thread(new RaceCounterThread());
+				execService.submit(rct);
+			}
+			execService.shutdown();
+			while (!execService.isTerminated()) {
+			}
+		} else {
+			// Schedule Thread to run after 10 second
+			// ScheduledExecutorService execService = Executors
+			// .newScheduledThreadPool(100);
+			// long delay = 3_000;
+			//
+			// for (int i = 0; i < count; i++) {
+			// Thread rct = new Thread(new RaceCounterThread());
+			// execService.schedule(rct, delay, TimeUnit.MILLISECONDS);
+			// }
+
+			ExecutorService execService = Executors.newFixedThreadPool(500);
+			for (int i = 0; i < count; i++) {
+				Thread rct = new Thread(new RaceCounterThread());
+				execService.submit(rct);
+			}
+			execService.shutdown();
+			while (!execService.isTerminated()) {
+			}
 		}
-		execService.shutdown();
-		while (!execService.isTerminated()) {
-		}
+
 	}
 
 }

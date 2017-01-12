@@ -8,7 +8,7 @@ package com.st.myprojects.main.util;
  *
  */
 public class GenericUtils {
-	
+
 	
 
 }

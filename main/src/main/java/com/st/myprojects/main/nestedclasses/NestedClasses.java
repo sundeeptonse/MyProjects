@@ -39,7 +39,7 @@ public class NestedClasses {
 		NestedClasses.NonStaticClass nc2 = nc.new NonStaticClass();
 
 		// Anonymous Classes
-		Arrays.sort(args, new Comparator<String>() {
+		Arrays.parallelSort(args, new Comparator<String>() {
 			@Override
 			public int compare(String o1, String o2) {
 				return o1.length() - o2.length();

@@ -3,7 +3,14 @@
  */
 package com.st.myprojects.main.datastructures.list;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
+
+import com.st.myprojects.main.util.CommonUtil;
+import com.st.myprojects.main.util.NumberUtil;
 
 /**
  * @author sundeeptonse
@@ -91,24 +98,18 @@ public class LinkedList<T> {
 	public static class LinkedListUtil {
 
 		public static <T> void reverseLinkedListN(LinkedList<T> linkedList) {
-
 			Node<T> currentNode = linkedList.getFirstNode();
 			Node<T> nextNode;
 
 			// Create a Previous Value and Set the Previous Value to null
 			Node<T> previous = null;
-
 			while (currentNode != null) {
-
 				// Store the nextNode in a Value to be re-used later
 				nextNode = currentNode.next;
-
 				// Set the Next Node to the Previous Value
 				currentNode.next = previous;
-
 				// Set the Previous to the Current Node
 				previous = currentNode;
-
 				// Set the Node Value to node.next
 				currentNode = nextNode;
 			}
@@ -142,7 +143,32 @@ public class LinkedList<T> {
 	}
 }
 
+class Node<T> {
+	// The data being stored in the node
+	public T data;
+	// A reference to the next node, null for last node
+	public Node<T> next;
+
+	public Node(T data) {
+		this.data = data;
+	}
+
+	public T getData() {
+		return this.data;
+	}
+}
+
 class LinkedListCommonUtil {
+
+	public static <T> int getSize(LinkedList<T> linkedList) {
+		int size = 0;
+		Node<T> node = linkedList.getFirstNode();
+		while (node != null) {
+			node = node.next;
+			size++;
+		}
+		return size;
+	};
 
 	public static <T> void printLinkedList(LinkedList<T> linkedList) {
 		Node<T> node = linkedList.getFirstNode();
@@ -157,19 +183,66 @@ class LinkedListCommonUtil {
 		}
 	}
 
-}
+	/*
+	 * Store two pointers p1 and p2,
+	 * 
+	 * Move p1 to k times, then move both pointer till we reach the end
+	 */
 
-class Node<T> {
-	// The data being stored in the node
-	public T data;
-	// A reference to the next node, null for last node
-	public Node<T> next;
+	public static <T> T getElementKToLast(LinkedList<T> linkedList, int k) {
+		Node<T> p1, p2;
+		p1 = p2 = linkedList.getFirstNode();
 
-	public Node(T data) {
-		this.data = data;
+		int counter = 1;
+		while (counter++ <= k) {
+			if (p1 == null) {
+				return null;
+			}
+			p1 = p1.next;
+		}
+
+		while (p1 != null) {
+			System.out.println("P1:" + p1.data +"P2:" + p2.data);
+			p1 = p1.next;
+			p2 = p2.next;
+		}
+		
+		return p2.data;
+
 	}
-	
-	public T getData(){
-		return this.data;
+
+	public static <T> boolean isPalindrome(LinkedList<T> linkedList) {
+		boolean isPalindrome = true;
+		int size = getSize(linkedList);
+		int mid = size / 2;
+		// If Even, then Size is odd, then we skip the Mid
+		boolean skipMid = !NumberUtil.isEven(size);
+
+		// Push the First Half Elements in to the Stack
+		// After that pop, the elements and compare till the end
+		Stack<T> stack = new Stack<>();
+
+		Node<T> node = linkedList.getFirstNode();
+		int count = 0;
+		while (node != null) {
+			if (count < mid) {
+				stack.push(node.data);
+			} else {
+				if (!(skipMid && count == mid)) {
+					T data = stack.pop();
+					System.out.println("pop :" + data + ":Node Data:"
+							+ node.data);
+
+					if (CommonUtil.compare(node.data, data) != 0) {
+						isPalindrome = false;
+						break;
+					}
+				}
+			}
+			count++;
+			node = node.next;
+			System.out.println(stack + ":" + count);
+		}
+		return isPalindrome;
 	}
 }

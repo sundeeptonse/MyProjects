@@ -26,7 +26,7 @@ public class ArraySort {
 		}
 		scan.close();
 
-		Arrays.sort(player, checker);
+		Arrays.parallelSort(player, checker);
 		for (int i = 0; i < player.length; i++) {
 			System.out.printf("%s %s\n", player[i].name, player[i].score);
 		}

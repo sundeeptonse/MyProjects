@@ -94,6 +94,12 @@ public class NumberUtil {
 	 * Generates a set of Integer Primes till number n
 	 * Sieve of Eratosthenes
 	 * 
+	 * Example :100
+	 *  4, 6, 8 , 10, 12, 24...100
+	 *  9, 12, 15, 18 ... 
+	 *  25, 50, 75
+	 *  49, 98
+	 *    
 	 * */
 	public static final List<Integer> generatePrimes(int number) {
 		List<Integer> primeArray = new ArrayList<>();

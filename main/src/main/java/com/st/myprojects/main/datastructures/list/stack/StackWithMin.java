@@ -9,6 +9,9 @@ import com.st.myprojects.main.util.CommonUtil;
 
 /**
  * @author sundeeptonse
+ * 6 , Min 6
+ * 7, 6,  Min 6
+ * 3, 7, 6 , Min 3 
  *
  */
 @SuppressWarnings("serial")

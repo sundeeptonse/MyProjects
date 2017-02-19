@@ -51,7 +51,7 @@ public class AddTwoNumbers {
 				node1 = node1.next;
 			}
 			sum += multipier;
-			
+
 			int modulo = sum % 10;
 			multipier = sum / 10;
 			if (firstNodeReference == null) {
@@ -86,7 +86,7 @@ public class AddTwoNumbers {
 				node1 = node1.next;
 			}
 			sum += multipier;
-			
+
 			int modulo = sum % 10;
 			multipier = sum / 10;
 			if (firstNodeReference == null) {
@@ -108,7 +108,7 @@ class DataStructureUtils {
 
 		ListNode lNew = new ListNode((int) (Math.random() * multiplier));
 		ListNode currentNode = lNew;
-		for (int i = 0; i < maxLength; i++) {
+		for (int i = 1; i < maxLength; i++) {
 			ListNode newNode = new ListNode((int) (Math.random() * multiplier));
 			currentNode.next = newNode;
 			currentNode = newNode;
@@ -122,11 +122,11 @@ class DataStructureUtils {
 	}
 
 	public static void printListNode(ListNode parent) {
-		ListNode node1 = parent;
+		ListNode node = parent;
 		StringBuilder str = new StringBuilder();
-		while (node1.next != null) {
-			node1 = node1.next;
-			str.append(node1.val + "-->");
+		while (node != null) {
+			str.append(node.val + "-->");
+			node = node.next;
 		}
 		System.out.println(str.toString());
 	}

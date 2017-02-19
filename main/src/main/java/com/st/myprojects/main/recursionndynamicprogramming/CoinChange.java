@@ -87,14 +87,20 @@ public class CoinChange {
 		if (map.containsKey(remainingObj)) {
 			return map.get(remainingObj);
 		} else {
-			int amountInCoin = 0;
+			// int amountInCoin = 0;
+			// long ways = 0;
+			// while (amountInCoin <= money) {
+			// // Count down
+			// int remaining = money - amountInCoin;
+			// // Send the Remaining Money with the index
+			// ways += makeChange(coins, remaining, index + 1, map);
+			// amountInCoin += coins[index];
+			// }
+
 			long ways = 0;
-			while (amountInCoin <= money) {
-				// Count down
-				int remaining = money - amountInCoin;
-				// Send the Remaining Money with the index
-				ways += makeChange(coins, remaining, index + 1, map);
-				amountInCoin += coins[index];
+			while (money >= 0) {
+				ways += makeChange(coins, money, index + 1, map);
+				money -= coins[index];
 			}
 			map.put(remainingObj, ways);
 			return ways;

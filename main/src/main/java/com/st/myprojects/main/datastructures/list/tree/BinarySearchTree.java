@@ -101,8 +101,8 @@ public class BinarySearchTree<E extends Comparable<E>> implements TreeI<E> {
 	}
 
 	/*-
-	 * Given any Tree, gets the In-order Successor to a given node Case1 : If
-	 * Right SubTree is present, find the Minimum Element in the Right Sub Tree
+	 * Given any Tree, gets the In-order Successor to a given node 
+	 * Case1 : If Right SubTree is present, find the Minimum Element in the Right Sub Tree
 	 * Case2 : If the Right Sub Tree is null,
 	 * 		Walk the Tree and find the Deepest Left Most Ancestor
 	 */
@@ -130,7 +130,6 @@ public class BinarySearchTree<E extends Comparable<E>> implements TreeI<E> {
 						ancestor = ancestor.left;
 					}
 				}
-
 			}
 		}
 		if (inOrderSuccessorNode != null) {
@@ -146,7 +145,6 @@ public class BinarySearchTree<E extends Comparable<E>> implements TreeI<E> {
 		BstNode<E> returnNode = null;
 		if (node != null) {
 			int compare = CommonUtil.compare(node.data, data, null);
-
 			if (compare > 0) {
 				returnNode = findNode(node.left, data);
 			} else if (compare < 0) {

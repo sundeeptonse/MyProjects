@@ -10,9 +10,9 @@ import java.util.Comparator;
  *
  */
 public class CommonUtil {
-	
-	public static <T> int findMinimumIndex(T[] list, int startIndex, int endIndex,
-			Comparator<? super T> comparator) {
+
+	public static <T> int findMinimumIndex(T[] list, int startIndex,
+			int endIndex, Comparator<? super T> comparator) {
 		int minimum = startIndex;
 		for (int i = startIndex + 1; i < endIndex; i++) {
 			if (CommonUtil.compare(list, minimum, i, comparator) > 0) {
@@ -21,19 +21,18 @@ public class CommonUtil {
 		}
 		return minimum;
 	}
-	
+
 	public static <T> void swap(T[] list, int index1, int index2) {
 		T temp = list[index1];
 		list[index1] = list[index2];
 		list[index2] = temp;
 	}
-	
-	public static  void swapCh(char[] list, int index1, int index2) {
+
+	public static void swapCh(char[] list, int index1, int index2) {
 		char temp = list[index1];
 		list[index1] = list[index2];
 		list[index2] = temp;
 	}
-
 
 	public static <T> int compare(T value1, T value2) {
 		return compare(value1, value2, null);
@@ -44,13 +43,24 @@ public class CommonUtil {
 	}
 
 	/*
-	 * Need to add Null Checks
+	 * Need to add Null Checks and Check if Type is Comparable
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> int compare(T value1, T value2,
+			Comparator<? super T> comparator, boolean reverse) {
+		int compare = 0;
+		if (comparator == null) {
+			compare = ((Comparable<T>) value1).compareTo(value2);
+		} else {
+			compare = comparator.compare(value1, value2);
+		}
+		return reverse ? -compare : compare;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> int compare(T value1, T value2,
 			Comparator<? super T> comparator) {
-		return comparator == null ? ((Comparable<T>) value1).compareTo(value2)
-				: comparator.compare(value1, value2);
+		return compare(value1, value2, comparator, false);
 	}
 
 	@SuppressWarnings("unchecked")

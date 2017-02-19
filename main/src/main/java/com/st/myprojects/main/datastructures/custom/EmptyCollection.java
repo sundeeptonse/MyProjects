@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.st.myprojects.main.datatypes.collections;
+package com.st.myprojects.main.datastructures.custom;
 
 import java.util.ArrayList;
 import java.util.Collections;

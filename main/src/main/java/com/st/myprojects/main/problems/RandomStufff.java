@@ -5,17 +5,18 @@ package com.st.myprojects.main.problems;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-
-import com.st.myprojects.main.util.MapUtil;
+import java.util.Queue;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author sundeeptonse
@@ -23,10 +24,42 @@ import com.st.myprojects.main.util.MapUtil;
  */
 public class RandomStufff {
 
+	public static int test() {
+		Math.max(10, 20);
+		return Integer.MIN_VALUE;
+
+	}
+
+	private static Comparator<Integer> comparator = new Comparator<Integer>() {
+		public int compare(Integer o1, Integer o2) {
+			return -o1.compareTo(o2);
+		}
+	};
+
+	private static Comparator<Integer> comparator2 = Collections.reverseOrder();
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
+		Queue<Integer> queue = new ArrayDeque<>();
+		queue.add(null);
+		queue.add(1);
+		
+		System.out.println("Queue:" + queue);
+		
+		
+		Map<Integer[], Integer> map = new HashMap<>();
+
+		Set<Integer> set = new TreeSet<>();
+
+		Set<Character> set2 = new HashSet<>();
+		int n = 3;
+		while (n-- > 1) {
+		}
+		int[] array = { 3, 2, 3 };
+		majorityElement(array);
 
 		List list = new ArrayList<>();
 		Collections.sort(list);
@@ -74,6 +107,24 @@ public class RandomStufff {
 			}
 		});
 
+	}
+
+	public static List<Integer> majorityElement(int[] nums) {
+		Set<Integer> set = new HashSet<>();
+		Map<Integer, Integer> numCount = new HashMap<>();
+		for (int num : nums) {
+			Integer count = numCount.get(num);
+			if (count == null) {
+				count = 0;
+			}
+			count++;
+			if (count > nums.length / 3) {
+				set.add(num);
+			}
+			numCount.put(num, count);
+		}
+		System.out.println("Set:" + set);
+		return new ArrayList<>(set);
 	}
 
 	public static void old() {

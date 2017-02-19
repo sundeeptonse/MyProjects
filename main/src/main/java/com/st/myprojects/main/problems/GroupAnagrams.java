@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.st.myprojects.main.algorithms.sorting.QuickSort;
-import com.st.myprojects.main.datatypes.collections.HashMapList;
+import com.st.myprojects.main.datastructures.custom.HashMapList;
 import com.st.myprojects.main.util.StringUtil;
 
 /*-

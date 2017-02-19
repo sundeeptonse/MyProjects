@@ -6,12 +6,30 @@ package com.st.myprojects.main.util;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+
+import com.st.myprojects.main.datastructures.custom.HashMapSet;
 
 /**
  * @author sundeeptonse
  *
  */
 public class StringUtil {
+
+	public static void main(String... args) {
+		Set<String> list = generatePermutations("abcd");
+		System.out.println(list.size());
+		for (String listVal : list) {
+			System.out.println(listVal);
+		}
+
+		list = generatePermutations("bbbbb");
+		System.out.println(list.size());
+		for (String listVal : list) {
+			System.out.println(listVal);
+		}
+
+	}
 
 	// Create a ignore List
 	private static Map<Character, Integer> ignoreMap = new HashMap<>();
@@ -30,11 +48,47 @@ public class StringUtil {
 	private static int numeric_a = Character.getNumericValue('a');
 	private static int numeric_z = Character.getNumericValue('z');
 
-	public static void main(String... args) {
-		System.out
-				.println(isPermutationOfPalindrome("abcdefghijklmnopqrstuvwxyzabcdefghijkl"));
-		System.out.println(isPermutationOfPalindrome("aadd"));
-		System.out.println(isPermutationOfPalindrome("aaedd"));
+	//
+	private static HashMapSet<String, String> permutationList = new HashMapSet<>();
+
+	public static Set<String> generatePermutations(String string) {
+		generatePermutationsR(string);
+		// Store in an HashMap List
+		// abcd
+		// a{Permutations of bcd}
+		// b{Permutations of acd}
+		// c{Permutations of abd}
+		// d{Permutations of abc}
+		return permutationList.get(string);
+	}
+
+	public static void generatePermutationsR(String string) {
+		if (string.length() == 1) {
+			permutationList.put(string, string);
+			return;
+		} else {
+			// Send Ahead
+			// If doesn't exist, then
+			if (permutationList.get(string) == null) {
+				// For All Strings, perform the below
+				for (int i = 0; i < string.length(); i++) {
+					char charAtI = string.charAt(i);
+					String restofString = string.substring(0, i)
+							+ string.substring(i + 1, string.length());
+					System.out.println("String:" + string + "CharAtI:"
+							+ charAtI + ":SubString:" + restofString);
+					// Generate Permutations for the bcd, in case of abcd etc
+					if (permutationList.get(restofString) == null) {
+						generatePermutationsR(restofString);
+					}
+					// Once Generated Use that List and Collate that into {char,
+					// Permutations of Sub} , {Permutations of Sub, sub}
+					for (String subSt : permutationList.get(restofString)) {
+						permutationList.put(string, charAtI + subSt);
+					}
+				}
+			}
+		}
 	}
 
 	public static boolean isNullOrBlank(String stringValue) {
@@ -95,11 +149,26 @@ public class StringUtil {
 
 	/*
 	 * Returns true is strings are permutations of each other - i.e Anagram
+	 * nlogn --> Due to Sorting
 	 */
 	public final static boolean areStringsAnagram(String string1, String string2) {
 		return (StringUtil.length(string1) == StringUtil.length(string2)) ? (sortChars(
 				string1).compareTo(sortChars(string2)) == 0 ? true : false)
 				: false;
+	}
+
+	public final static boolean areStringsAnagramE(String string1,
+			String string2) {
+		return (StringUtil.length(string1) == StringUtil.length(string2)) ? (getNumericRepresentation(string1) == getNumericRepresentation(string2))
+				: false;
+	}
+
+	public final static int getNumericRepresentation(String string) {
+		int number = 0;
+		for (int i = 0; i < string.length(); i++) {
+			number += getCharNumber(string.charAt(i));
+		}
+		return number;
 	}
 
 	/*

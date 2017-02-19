@@ -3,7 +3,10 @@
  */
 package com.st.myprojects.main.util;
 
+import java.math.BigInteger;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -13,7 +16,127 @@ import java.util.List;
 public class NumberUtil {
 
 	public static void main(String... args) {
-		System.out.println(generatePrimes(75).toString());
+		int[] array = { 1, 1, 2, 2, 4 };
+
+		BigInteger number = new BigInteger("1");
+		number.multiply(new BigInteger("2"));
+		System.out.println(number);
+		System.out.println("Remove Duplicates" + removeDuplicates(array));
+		
+		int value = (int)Math.pow(10, 0);
+		int numberRep =0;
+        numberRep += numberRep*(int)Math.pow(10, 1);  
+	}
+
+	public static final int removeDuplicates(int[] array) {
+		Deque<Integer> queue = new ArrayDeque<>();
+		for (int value : array) {
+			if (!(queue.size() > 0 && queue.peekLast() == value)) {
+				queue.add(value);
+			}
+		}
+		int i = 0;
+		int size = queue.size();
+		while (!queue.isEmpty()) {
+			array[i++] = queue.pollFirst();
+		}
+		return size;
+	}
+
+	public static final int stringToInt(String string) {
+		int returnValue = 0;
+		int radix = 10;
+		// Remove Leading and Ending Trail Spaces
+		String newString = string.trim();
+
+		if (newString.length() > 0) {
+			int i = 0;
+			boolean isNeg = false;
+			if (newString.charAt(i) == '-') {
+				isNeg = true;
+				i++;
+			} else if (newString.charAt(i) == '+') {
+				i++;
+			}
+
+			int maxAllowedValue = isNeg ? -Integer.MIN_VALUE
+					: Integer.MAX_VALUE;
+
+			boolean leadingCharacter = true;
+			int numberOfDigit = 0;
+			while (i < newString.length()) {
+				char charAtI = newString.charAt(i++);
+				if (charAtI >= '0' && charAtI <= '9') {
+					// If leadingCharacter and the initial Characters start with
+					// '0'
+					if (leadingCharacter && charAtI == '0') {
+						continue;
+					}
+					leadingCharacter = false;
+					int numericValue = Character.getNumericValue(charAtI);
+
+					numberOfDigit++;
+					if (numberOfDigit > 10) {
+						returnValue = maxAllowedValue;
+						break;
+					} else {
+						returnValue *= radix;
+						if (maxAllowedValue - (returnValue + numericValue) <= 0) {
+							returnValue = maxAllowedValue;
+							break;
+						} else {
+							returnValue += numericValue;
+						}
+					}
+				} else {
+					break;
+				}
+			}
+			returnValue = isNeg ? -returnValue : returnValue;
+		}
+		return returnValue;
+	}
+
+	public static final int reverseNumber(int number) {
+		char[] charArray = String.valueOf(number).toCharArray();
+		char[] finalArray;
+		int i = 0;
+		if (number < 0) {
+			finalArray = new char[charArray.length - 1];
+			i++;
+		} else {
+			finalArray = new char[charArray.length];
+		}
+		for (; i < charArray.length; i++) {
+			finalArray[charArray.length - i - 1] = charArray[i];
+		}
+		int newNumber = 0;
+		try {
+			newNumber = Integer.parseInt(new String(finalArray));
+		} catch (NumberFormatException nfe) {
+
+		}
+		return number < 0 ? -newNumber : newNumber;
+	}
+
+	public static final int reverseNumber2(int number) {
+		String stringV = Integer.toString(number);
+		StringBuilder str = new StringBuilder(stringV.length());
+		int i = stringV.length() - 1;
+		int end = 0;
+		if (number < 0) {
+			str.append("-");
+			end++;
+		}
+		for (; i >= end;) {
+			str.append(stringV.charAt(i--));
+		}
+		int newNumber = 0;
+		try {
+			newNumber = Integer.parseInt(str.toString());
+		} catch (NumberFormatException nfe) {
+		}
+		return newNumber;
 	}
 
 	public static final boolean isEven(int number) {
@@ -86,7 +209,6 @@ public class NumberUtil {
 			}
 		}
 		return true;
-
 	}
 
 	/*- 

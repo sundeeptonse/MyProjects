@@ -10,19 +10,22 @@ enum Company2 {
 
 public class EnumTest {
 
-	
 	/**
 	 * A Company Type
 	 * */
 	public enum Company {
-		/** EBAY*/
-		EBAY(30), 
-		/**PAYPAL */
-		PAYPAL(10, 20), GOOGLE(15, 20), YAHOO(20, 20), ATT(25, 25), SUNDEEP(
-				50, 60, 70);
+		/** EBAY */
+		EBAY(30),
+		/** PAYPAL */
+		PAYPAL(10, 20), GOOGLE(15, 20), YAHOO(20, 20), ATT(25, 25), SUNDEEP(50,
+				60, 70);
 		private int value1;
 		private int value2;
 		private int value3;
+
+		private enum Test {
+			a, b, c, d
+		}
 
 		private Company(int value1) {
 			this.value1 = value1;
@@ -52,11 +55,7 @@ public class EnumTest {
 
 		}
 
-		if (Company.EBAY.equals("EBAY")) {
-			System.out.println("Ehll");
-			System.out
-					.println(Company.EBAY.value1 + "::" + Company.EBAY.value2);
-		}
+		
 
 		Values value = Values.GO;
 		switch (value) {
@@ -73,12 +72,12 @@ public class EnumTest {
 		System.out.println("------------------------");
 		for (Operation op : Operation.values()) {
 			System.out.printf("%f %s %f = %f\n", x, op, y, op.apply(x, y));
-			System.out.printf("Operation %s;Operation to String %s;Operation from String(original value) \n", op,
-					op.toString());
-			
+			System.out
+					.printf("Operation %s;Operation to String %s;Operation from String(original value) \n",
+							op, op.toString());
+
 		}
-		
-		
+
 		System.out.println("Operation:" + Operation.fromString("/"));
 
 	}
@@ -89,7 +88,7 @@ public class EnumTest {
  * Operation Test - Method Values upon call
  */
 enum Operation {
-	
+
 	PLUS("+") {
 		@Override
 		double apply(double x, double y) {
@@ -105,7 +104,7 @@ enum Operation {
 	TIMES("*") {
 		@Override
 		double apply(double x, double y) {
-			
+
 			return x * y;
 		}
 	},
@@ -118,29 +117,29 @@ enum Operation {
 	SUBTRACTNDIVIDE("-/") {
 		@Override
 		double apply(double x, double y) {
-			x  = MINUS.apply(x, y);
+			x = MINUS.apply(x, y);
 			return x / y;
-		} 
+		}
 	};
-	
+
 	abstract double apply(double x, double y);
 
 	private final String symbol;
 	private static String test = "Operation Yeah";
-	private static final Map<String,Operation> stringToEnum = new HashMap<>();
-	
+	private static final Map<String, Operation> stringToEnum = new HashMap<>();
+
 	static {
 		System.out.println("Test:" + test);
 	}
-	
-	static{
-		for(Operation op : values()){
-			//??
+
+	static {
+		for (Operation op : values()) {
+			// ??
 			stringToEnum.put(op.toString(), op);
 		}
 	}
-	
-	public static Operation fromString(String symbol){
+
+	public static Operation fromString(String symbol) {
 		return stringToEnum.get(symbol);
 	}
 
@@ -149,8 +148,8 @@ enum Operation {
 	}
 
 	/*
-	 * This method has been <i>overriden<i/>. This needs to be taken into account
-	 * {@code if(this.symbol.length > 0 ){ }}
+	 * This method has been <i>overriden<i/>. This needs to be taken into
+	 * account {@code if(this.symbol.length > 0 ){ }}
 	 */
 	@Override
 	public String toString() {

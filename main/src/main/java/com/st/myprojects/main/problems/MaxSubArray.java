@@ -3,7 +3,10 @@
  */
 package com.st.myprojects.main.problems;
 
-import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * @author sundeeptonse
@@ -16,56 +19,62 @@ import java.util.ArrayDeque;
  * 
  *         O/P : 2,3,454,5454,6554
  * 
- *         Current Efficiency : O(n)
+ * 
+ *         array : 100, 2, 4, 500, 54, 14, 6554, k: 3
+ * 
+ *         O/P :100,500,500,500,6554,
+ * 
+ * 
  *
  */
 public class MaxSubArray {
 
 	public static void main(String... args) {
+
 		int[] inputArray = { 4, 3, 1, 2, 7, 1, 1 };
-		maxSubArrays(inputArray, 3);
-		// Utils.printArray(outputArray);
+		System.out.println(Arrays.toString(maxSubArrays(inputArray, 3)));
 	}
 
-	public static void maxSubArrays(int[] a, int k) {
-		int n = a.length;
+	// (n-k)log(k); = n*log(k) = n
+	public static int[] maxSubArrays(int[] a, int k) {
 
-		// Create a Double Ended Queue, Q that will store indexes of array
-		// elements
-		// The queue will store indexes of useful elements in every window and
-		// it will
-		// maintain decreasing order of values from front to rear in Q, i.e.,
-		// a[Q.front[]] to a[Q.rear()] are sorted in decreasing order
+		int[] maxSubArray = new int[a.length - k + 1];
+		// If we use a Max Heap with Size k
+		// The Largest will bubble to the top
 
-		ArrayDeque<Integer> Q = new ArrayDeque<Integer>();
+		// Have a PQ with a fixed Size
+		PriorityQueue<Integer> pq = new PriorityQueue<>(
+				Collections.reverseOrder());
 
-		// Process first k (or first window) elements of array
-		int i;
-		for (i = 0; i < k; i++)
-		{
-
-			while (!Q.isEmpty() && a[i] >= a[Q.size() - 1])
-				Q.pollLast();
-			// Remove from rear
-			// Add new element at rear of queue
-			Q.add(i);
+		// Fill the PQ with the first k numbers
+		int i = 0;
+		for (; i < k - 1;) {
+			pq.add(a[i++]);
 		}
 
-		
-		// Process rest of the elements, i.e., from a[k] to a[n-1]
+		int j = 0;
+		// max = pq.peek();
+		// counter1 = startIndex, start with 0;
+		// counter2 = nextIndex;, start with k,
 
-		for (; i < n; ++i) {
-			System.out.print(a[Q.peek()] + " ");
-			while (!Q.isEmpty() && Q.peek() <= i - k)
-				Q.pop();
+		// Keep Sliding the window ahead till counter2<length
 
-			while (!Q.isEmpty() && a[i] >= a[Q.peekLast()])
-				Q.pollLast();
-			// Add current element at the rear of Q
-			Q.add(i);
+		// ProcessNextRow
+		// Remove1st and AddNext
+		// log(k)
+		// pq.remove(counter1++);
+		// log(k)
+		// pq.add(counter2++);
+		// Since we are removing and adding log(k)
+
+		for (; i < a.length;) {
+			// Add/Peek/Remove
+			pq.add(a[i++]);
+			maxSubArray[j] = pq.peek();
+			pq.remove(a[j++]);
 		}
-		// Print the maximum element of last window
-		System.out.print(a[Q.peek()] + " ");
+
+		return maxSubArray;
+
 	}
-
 }

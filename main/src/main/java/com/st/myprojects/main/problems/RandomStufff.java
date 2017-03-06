@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 import java.util.TreeSet;
 
 /**
@@ -43,13 +44,11 @@ public class RandomStufff {
 	 */
 	public static void main(String[] args) {
 
-		Queue<Integer> queue = new ArrayDeque<>();
-		queue.add(null);
-		queue.add(1);
-		
-		System.out.println("Queue:" + queue);
-		
-		
+		Stack<Integer> stack = new Stack<>();
+		stack.add(null);
+
+		System.out.println(stack);
+
 		Map<Integer[], Integer> map = new HashMap<>();
 
 		Set<Integer> set = new TreeSet<>();

@@ -24,8 +24,10 @@ import java.util.TreeSet;
  *
  */
 public class RandomStufff {
-
+	
+	
 	public static int test() {
+		int n1=0,n2=1,n3,i,count=10;
 		Math.max(10, 20);
 		return Integer.MIN_VALUE;
 

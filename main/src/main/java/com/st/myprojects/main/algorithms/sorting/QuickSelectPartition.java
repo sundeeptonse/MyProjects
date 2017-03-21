@@ -8,7 +8,7 @@ import java.util.Comparator;
 
 import com.st.myprojects.main.util.SortingUtil;
 
-/**
+/*-
  * @author:sundeeptonse
  *
  *                      Given an unsorted Array Finds the Kth Smallest/Largest
@@ -46,13 +46,11 @@ import com.st.myprojects.main.util.SortingUtil;
  *                      algorithm for further discussion of the connection with
  *                      sorting.
  * 
- * 
- * 
  */
 public class QuickSelectPartition {
 
 	public static void main(String... args) {
-		Integer[] list = { 4, 56, 6, 6, 12, 34, 90, 1, -1, 2 };
+		Integer[] list = { 4, 56, 6, 6, 6, 6, 12, 34, 90, 1, -1, 2 };
 		for (int i = 0; i < list.length;) {
 			System.out.println(new QuickSelectPartition().quickSelect(list,
 					i++, Collections.reverseOrder()));

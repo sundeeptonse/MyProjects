@@ -1,4 +1,4 @@
-package com.st.myprojects.main.lambda;
+package com.st.myprojects.main.lambda.others;
 
 import java.util.Arrays;
 import java.util.List;

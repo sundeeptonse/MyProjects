@@ -1,4 +1,4 @@
-package com.st.myprojects.main.lambda.invokedynamic;
+package com.st.myprojects.main.lambda.others;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

@@ -1,4 +1,4 @@
-package com.st.myprojects.main.lambda;
+package com.st.myprojects.main.lambda.others;
 
 public class Sample {
 

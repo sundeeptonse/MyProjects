@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.st.myprojects.main.lambda;
+package com.st.myprojects.main.lambda.chap1;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -56,10 +56,53 @@ public class InternalIteration {
 		 *      3) Type of Consumer, can be inferred from the type of List it is  i.e List<Point> 
 		 */
 		pointList.forEach(p -> p.translate(1, 1));
-		System.out.println("Lambda:"+ pointList);
+		System.out.println("Lambda:" + pointList);
+
+		// Additional
+		// Type Casting
+		pointList.forEach((Point p) -> p.translate(1, 1));
+
+		// For each Multiple Lines, can be used with or without typecasting
+		pointList.forEach(p ->
+		{
+			int i = 3;
+			while (i-- < 0) {
+				System.out.println(p);
+			}
+		});
+
+		// Print p
+		pointList.forEach(p -> System.out.println(p));
+		// Print p for static variable or static method
+		pointList.forEach(System.out::println);
+
+		// :: Operator --> Removes the brackets for any method and Infer the
+		// value from the Collection Type
+		// For Static
+		System.out.println("Static");
+		pointList.forEach(TestPrint::print);
+
+		// For Non Static
+		System.out.println("Non Static");
+		pointList.forEach(new TestPrint()::printInstance);
 		
 
 	}
+}
+
+class TestPrint {
+	public static void print(Object o) {
+		System.out.println(o);
+	}
+
+	public void printInstance(Object o) {
+		System.out.println(o);
+	}
+	
+	public void printInstance2(Object o, int value) {
+		System.out.println(o);
+	}
+
 }
 
 class InternalIterationConsumer {

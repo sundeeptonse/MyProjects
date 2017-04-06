@@ -69,10 +69,13 @@ public class ComposingBehaviors {
 		Comparator<Point> compareByXNew5 = Comparator.comparing((p) -> p
 				.distance(0, 0));
 
+		// Reversed
+		Comparator<Point> compareByXNew6 = compareByXNew5.reversed();
+
 		List<Integer> intList = Arrays.asList(1, 2, 3, 4, 5);
 		intList.stream()
 				.map(i -> new Point(i % 3, i / 3))
-				.sorted(Comparator.comparing((p) -> p.distance(0, 0)))
+				.sorted(Comparator.comparing(p -> p.distance(0, 0)))
 				.forEach(
 						p -> System.out.printf("(%f, %f2)", p.getX(), p.getY()));
 

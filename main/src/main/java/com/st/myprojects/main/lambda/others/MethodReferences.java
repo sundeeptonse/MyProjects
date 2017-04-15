@@ -28,7 +28,7 @@ public class MethodReferences {
 
 	}
 
-	public static void getString(Integer value) {
+	public static <E> void getString(E value) {
 		System.out.println(String.valueOf(value));
 	}
 

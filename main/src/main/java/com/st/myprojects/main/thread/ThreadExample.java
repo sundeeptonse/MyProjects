@@ -111,6 +111,11 @@ class ThreadImplementation {
 					};
 					Thread thread2 = new Thread(myRunnable);
 					thread2.start();
+
+					Thread t = new Thread(
+							() -> System.out.println("Runnable running"));
+					
+					
 				}
 			}
 
@@ -159,7 +164,6 @@ class ThreadImplementation {
 					Thread extendedThread = new Thread(new MyThreadExtends(),
 							"MyThreadExtends:" + i);
 					extendedThread.start();
-					
 
 				}
 			}

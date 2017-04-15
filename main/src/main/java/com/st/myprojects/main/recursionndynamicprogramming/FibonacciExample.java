@@ -4,6 +4,7 @@
 package com.st.myprojects.main.recursionndynamicprogramming;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 import com.st.myprojects.main.util.DateUtil;
 import com.st.myprojects.main.util.DateUtil.Time;
@@ -64,17 +65,13 @@ public class FibonacciExample {
 
 	public static int fibMInt(int n) {
 		int[] memo = new int[n + 1];
+		Arrays.fill(memo, -1);
 		return fibMInt(n, memo);
 	}
 
 	private static int fibMInt(int n, int[] memo) {
-		if (n <= 0) {
-			return 0;
-		} else if (n == 1) {
-			return 1;
-		} else if (memo[n] == 0) {
-			memo[n] = fibMInt(n - 1, memo) + fibMInt(n - 2, memo);
-		}
+		memo[n] = n > 1 ? (memo[n] != -1 ? memo[n] : fibMInt(n - 1, memo)
+				+ fibMInt(n - 2, memo)) : (n == 1) ? 1 : 0;
 		return memo[n];
 	}
 }

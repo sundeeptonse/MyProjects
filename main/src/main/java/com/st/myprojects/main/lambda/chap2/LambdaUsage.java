@@ -3,6 +3,8 @@
  */
 package com.st.myprojects.main.lambda.chap2;
 
+import java.awt.Point;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.function.IntBinaryOperator;
@@ -46,6 +48,12 @@ public class LambdaUsage {
 
 	public static void main(String... args) throws Exception {
 
+		Comparator<Integer> comp1 = (a, b) -> -a.compareTo(b);
+		Comparator<Integer> comp2 = Comparator.comparing((i) -> i.toString());
+
+		Comparator<Point> compareByXNew4 = Comparator
+				.comparing((p) -> p.getX());
+
 		// Array assignment
 		IntBinaryOperator[] intBinaryOperator = new IntBinaryOperator[] {
 				(x, y) -> x + y, (x, y) -> x - y, (x, y) -> x * y,
@@ -78,7 +86,7 @@ public class LambdaUsage {
 		new Thread((Runnable) run).start();
 
 		someMusings();
-		
+
 	}
 
 	public static void someMusings() {

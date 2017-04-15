@@ -5,6 +5,7 @@ package com.st.myprojects.main.lambda.chap1;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -15,6 +16,11 @@ import java.util.function.Consumer;
 public class InternalIteration {
 	public static void main(String... args) {
 
+		List<Integer> list = Arrays.asList(1, 2, 2, 3453, 5435, 4);
+		list.stream().filter(i -> i > 10).peek(System.out::println).count();
+		list.sort(Integer::compare);
+		System.out.println(list);
+		
 		/*
 		 * W/O Consumer
 		 */
@@ -85,7 +91,6 @@ public class InternalIteration {
 		// For Non Static
 		System.out.println("Non Static");
 		pointList.forEach(new TestPrint()::printInstance);
-		
 
 	}
 }
@@ -98,7 +103,7 @@ class TestPrint {
 	public void printInstance(Object o) {
 		System.out.println(o);
 	}
-	
+
 	public void printInstance2(Object o, int value) {
 		System.out.println(o);
 	}

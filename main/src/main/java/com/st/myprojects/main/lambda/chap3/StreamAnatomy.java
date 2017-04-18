@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import com.st.myprojects.main.lambda.chap1.Book;
+import com.st.myprojects.main.lambda.chap1.Topic;
+
 /*-
  * @author sundeeptonse
  * 
@@ -159,7 +162,7 @@ public class StreamAnatomy {
 		int totalPageCount = library.stream()
 				.mapToInt(b -> IntStream.of(b.getPageCounts()).sum()).sum();
 		System.out.println("TotalPageCount:" + totalPageCount);
-		
+
 		int totalPageCount2 = library.stream()
 				.flatMapToInt(b -> IntStream.of(b.getPageCounts())).sum();
 		System.out.println("totalPageCount2:" + totalPageCount);
@@ -281,92 +284,11 @@ public class StreamAnatomy {
 		lib.add(book5);
 		return lib;
 	}
+
+	
 }
 
-enum Topic {
-	HISTORY, PROGRAMMING, FICTION, MEDICINE, COMPUTING;
-}
 
-class Book {
-	String title;
-	List<String> authors;
-	// Page Counts of Multi volume books
-	int[] pageCounts;
-	Topic topic;
-	Year pubDate;
-	double height;
 
-	/**
-	 * @param title
-	 * @param authors
-	 * @param pageCounts
-	 * @param topic
-	 * @param pubDate
-	 * @param height
-	 */
-	public Book(String title, List<String> authors, int[] pageCounts,
-			Year pubDate, double height, Topic topic) {
-		super();
-		this.title = title;
-		this.authors = authors;
-		this.pageCounts = pageCounts;
-		this.topic = topic;
-		this.pubDate = pubDate;
-		this.height = height;
-	}
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
 
-	/**
-	 * @return the authors
-	 */
-	public List<String> getAuthors() {
-		return authors;
-	}
-
-	/**
-	 * @return the pageCounts
-	 */
-	public int[] getPageCounts() {
-		return pageCounts;
-	}
-
-	/**
-	 * @return the topic
-	 */
-	public Topic getTopic() {
-		return topic;
-	}
-
-	/**
-	 * @return the pubDate
-	 */
-	public Year getPubDate() {
-		return pubDate;
-	}
-
-	/**
-	 * @return the height
-	 */
-	public double getHeight() {
-		return height;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Book [title=" + title + ", authors=" + authors
-				+ ", pageCounts=" + Arrays.toString(pageCounts) + ", topic="
-				+ topic + ", pubDate=" + pubDate + ", height=" + height + "]";
-	}
-
-}

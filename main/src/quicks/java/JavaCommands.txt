@@ -1,0 +1,57 @@
+Heap Dumps:
+	jmap -heap:live,format=b,file=filename pid
+	jmap -dump:live,format=b,file=heap_06_20_beforeLoadTest_2.bin 22450 
+	jmap -heap `pgrep java`
+	jmap -histo:live 19585 | head 
+	jmap -heap 19585
+	
+	jps -l  
+
+Jstat Commands:
+	jstat -gc -t $1 $2 $3
+	jstat -gc -t 5581 5000 10000
+
+JAR/EAR/WAR Updates:
+	jar uf {DESTINATION}.ear {SRC}.jar
+	jar uf {DESTINATION}.jar com/CLASSLOCATION/Impl.class
+	jar uf {DESTINATION}.jar sqlmaps/*/x.xml
+EAR Update with Manifest:
+		jar -cvmf META-INF/MANIFEST.MF {EARFILE}.ear ./
+		jar -cvmf META-INF/MANIFEST.MF {JARFILE}.jar ./
+
+Remove File:
+	zip -d file.jar unwanted_file.txt
+
+#Get Default GC Version:
+	java -XX:+PrintCommandLineFlags -version
+	
+#SSL Debug:
+	java -Djavax.net.debug=ssl -classpath ./ HttpClientExample
+Verbose:
+	java -verbose:class
+	
+Java KeyTools:
+	https://www.sslshopper.com/article-most-common-java-keytool-keystore-commands.html
+	keytool -list -v -keystore cacerts
+	
+Serialization UID:
+	serialver -classpath com.apple.mystuff.serializable.Employee
+	serialver -show
+	
+Jmeter:
+	jmeter -n –t test.jmx -l testresults.jtl
+
+Some Links:
+	http://javarevisited.blogspot.com/2011/04/garbage-collection-in-java.html
+	http://javarevisited.blogspot.com/2011/11/hotspot-jvm-options-java-examples.html
+	http://www.oracle.com/technetwork/java/gc-tuning-5-138395.html
+	http://www.herongyang.com/Java-Tools/jdb-The-Java-Debugger.html
+	http://www.techpaste.com/2012/02/default-jvm-settings-gc-jit-java-heap-sizes-xms-xmx-operating-systems/#more-3569
+
+
+SSL Commands:
+ShowCertificates:
+	openssl s_client -connect ma-almsd-lapp05.corp.apple.com:4050 -tls1 -showcerts
+
+Fallback on TLS1:
+	openssl s_client -connect ma-almsd-lapp06:4050 -state -fallback_scsv -tls1

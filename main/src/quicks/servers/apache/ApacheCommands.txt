@@ -1,2 +1,72 @@
 #Apache Load Gen
 ab -k -c 100 -n 2000 ${URL}
+
+#Apache Log Format
+LogFormat "%h %l %u %t \"%r\" %>s %b %D" common
+
+#Apache Timeout Setting
+Timeout ${VALUE_INSEC}
+ProxyTimeout ${VALUE_INSEC} --> Gets Applied to all
+
+#Some Random PreFork Settings
+<IfModule prefork.c>
+StartServers       5
+MinSpareServers    5
+MaxSpareServers   10
+ServerLimit      512
+MaxClients       512
+MaxRequestsPerChild  1000
+</IfModule>
+
+#Some SSL Configs
+<IfModule mod_ssl.c>
+        SSLEngine On
+        SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+        #toGET Passphrase from Location
+        SSLPassPhraseDialog exec:${LOCATION}
+        #SHMCB Type Cache -> Preferable over others
+        SSLSessionCache shmcb:*/ssl_scache(512000)
+        SSLSessionCacheTimeout 300
+        SSLMutex file:{MUTEXLOCATION}/sslCache/ssl_mutex
+        SSLRandomSeed startup builtin
+        SSLRandomSeed connect builtin
+        #Example
+        SSLProtocol * 
+        SSLHonorCipherOrder on
+        SSLCipherSuite ***
+        SSLCertificateKeyFile ".PEM"
+        SSLCertificateChainFile ".intermediate"
+        SSLCertificateFile ".crt"
+ 
+ Some Quick Rewrite
+ 		#Proxy Certain Request to a base location
+ 		RewriteRule ^/(${base}/blah|${base}/blah2).* /${base} [P]
+ 		#Redirect all / requests to ${base}
+ 		RewriteRule ^/$ ${base}
+ 		#Serve Requests from Doc Root
+ 		ProxyPassMatch ^/(REQ1|REQ2).* !
+ 		
+ 		#Rewrite to Based on Query String
+ 		RewriteCond %{REQUEST_URI} ^/${REQ}.* [NC]
+        RewriteCond %{QUERY_STRING} ^${QUERYPARAM}\=(.*)$ [NC]
+        --> (.* ) --> %1
+        RewriteCond %1 !^$ [NC]
+        RewriteRule .* %1 [B,NE,P,L]
+        
+        #Set Timeout on Proxy Pass
+        ProxyPass ${location} ${new_location} timeout=300
+        ProxyPassReverse ${location} ${new_location} timeout=300
+        
+        
+ Basic:
+ 	Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+	Header set Strict-Transport-Security "max-age=*" env=HTTPS
+	Header set Strict-Transport-Security "max-age=*; includeSubDomains"
+	Header set X-XSS-Protection "0; mode=block"
+	Header always set X-Frame-Options "SAMEORIGIN"
+	
+	
+
+ 		
+ 		
+ 		

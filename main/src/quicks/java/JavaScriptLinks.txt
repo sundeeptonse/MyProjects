@@ -1,0 +1,25 @@
+	Prototype Javascript + apply + call:
+		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
+		http://javascript.info/tutorial/events-and-timing-depth#give-the-browser-time-for-job
+		http://schier.co/post/method-chaining-in-javascript
+
+	Object Oriented:
+		http://www.javascriptkit.com/javatutors/oopjs.shtml
+		http://code.tutsplus.com/tutorials/the-basics-of-object-oriented-javascript--net-7670
+		http://www.fotiweb.com/2006/12/13/javascript-object-literal-notation/
+		http://sarfraznawaz.wordpress.com/2012/01/26/javascript-self-invoking-functions/
+		http://krasimirtsonev.com/blog/article/object-oriented-programming-oop-in-javascript-extending-Inheritance-classes
+
+		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Values,_variables,_and_literals
+		http://www.htmlgoodies.com/beyond/javascript/accessing-private-functions-in-javascript.html
+		http://stackoverflow.com/questions/20035615/using-raw-image-data-from-ajax-request-for-data-uri
+		http://eclipsesource.com/blogs/2013/07/05/private-members-in-javascript/
+
+	http://www.drdobbs.com/cpp/developer-reading-list-the-must-have-boo/240148421?pgno=4
+	http://jsbooks.revolunet.com/
+	http://creativejs.com/2013/06/the-race-for-speed-part-1-the-javascript-engine-family-tree/
+	http://creativejs.com/2013/06/the-race-for-speed-part-2-how-javascript-compilers-work/
+
+	Handlebar
+	bootstrap
+	Tagmanager

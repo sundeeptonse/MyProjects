@@ -1,0 +1,28 @@
+Java Remote Profiling
+https://blogs.oracle.com/jamesbayer/entry/open_the_black_box_-_oracle_jr
+
+Jrockit - Info - good
+	http://docs.oracle.com/cd/E13150_01/jrockit_jvm/jrockit/geninfo/diagnos/
+
+Rest
+	https://blogs.oracle.com/WebLogicServer/entry/troubleshooting_tools_part_3_hprof
+
+
+Step 1: 
+Make sure the target application is configured to run using Java 6+. Click to update steps for profiling JDK 5 applications.
+
+Step 2: 
+If you have not done it before create a Remote profiling pack for the selected OS & JVM and upload it to the remote system. Remote profiling pack root directory will be referred to as <remote>.
+
+Step 3: 
+If you have not run profiling on the remote system yet, run the <remote>/bin/calibrate-16.sh script first to calibrate the profiler.
+
+Step 4: 
+Add the following parameter(s) to the application startup script (copy to clipboard):
+ -XX:+UseLinuxPosixThreadCPUClocks -agentpath:<remote>/lib/deployed/jdk16/linux-amd64/libprofilerinterface.so=<remote>/lib,5140
+
+Step 5: 
+Start the target application. The process will wait for the profiler to connect.
+
+Step 6: 
+Submit this dialog and click the Attach button to connect to the target application and resume its execution.

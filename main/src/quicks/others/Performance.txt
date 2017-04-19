@@ -1,0 +1,4 @@
+Performance Related Topics
+	http://www.hongkiat.com/blog/how-to-measure-front-end-website-performance/
+	https://blazemeter.com/blog/open-source-load-testing-tools-which-one-should-you-use
+	http://gettaurus.org/docs/Home/?utm_source=BM&utm_medium=BM_blog&utm_campaign=opensource_blog

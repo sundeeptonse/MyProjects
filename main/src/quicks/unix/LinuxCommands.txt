@@ -1,0 +1,25 @@
+Linux Commands to Update
+	ps -p 18484 -o %cpu,%mem,cmd
+	pkill -f "{SCRIPT}"
+	pgrep -f "{SCRIPT}”
+
+
+Cut Line
+sed -n -e "100,150p" FileName  
+
+# of Processes : ps huH p 20330 | wc -l
+Check Threads on a pid:
+	ps -eLo pid,lwp,nlwp,ruser,pcpu,stime,stime,args --sort=-pcpu | grep 13748
+	ps -p 13748 -eLo pid,lwp,nlwp,ruser,pcpu,stime,stime | grep 13748
+Sort Processes by cpu util:
+	ps -eo pid,user,pcpu,command --sort=-pcpu 
+Prints Thread Id of a process
+	ps -Lp 13748
+	
+	
+SAR(System Accounting Report)	
+	a) vmstat
+	b) iostat
+	c) prstat and so on
+       iostat(1), sar(1), mpstat(1), ps(1), top(1), free(1)
+	vmstat/vmstat1

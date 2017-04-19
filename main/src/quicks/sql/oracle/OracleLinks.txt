@@ -1,0 +1,12 @@
+DB:
+	http://database-geek.com/2011/01/30/oracle-dbms_scheduler-part-1the-basics/
+Oracle DB Performance:
+	Main Documentation : 
+		https://docs.oracle.com/cd/B19306_01/nav/portal_3.htm
+
+		https://docs.oracle.com/cd/B19306_01/server.102/b28051/toc.htm
+		https://docs.oracle.com/cd/B19306_01/server.102/b14211/toc.htm
+
+DB CPU Time:
+		http://blog.orapub.com/20140805/what-is-oracle-db-time-db-cpu-wall-time-and-non-idle-wait-time.html
+		https://savvinov.com/2012/04/06/awr-reports-interpreting-cpu-usage/

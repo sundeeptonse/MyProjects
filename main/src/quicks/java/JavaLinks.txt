@@ -1,0 +1,48 @@
+Jmeter:
+	jmeter -n –t test.jmx -l testresults.jtl
+	
+Java GC:
+	http://www.cubrid.org/blog/dev-platform/how-to-monitor-java-garbage-collection/
+
+Some Links:
+	http://javarevisited.blogspot.com/2011/04/garbage-collection-in-java.html
+	http://javarevisited.blogspot.com/2011/11/hotspot-jvm-options-java-examples.html
+	http://www.oracle.com/technetwork/java/gc-tuning-5-138395.html
+	http://www.herongyang.com/Java-Tools/jdb-The-Java-Debugger.html
+	http://www.techpaste.com/2012/02/default-jvm-settings-gc-jit-java-heap-sizes-xms-xmx-operating-systems/#more-3569
+	https://systembash.com/mqtt-vs-websockets-vs-http2-the-best-iot-messaging-protocol/
+	https://alpacapowered.wordpress.com/2014/10/20/ssl-poodle-attack-what-is-this-scsv-thingy/
+	http://javarevisited.blogspot.com/2013/01/top-5-java-programming-books-best-good.html
+	http://javarevisited.blogspot.com/2013/03/5-good-books-to-learn-spring-framework-mvc-java-programmer.html
+	http://javarevisited.blogspot.sg/2014/07/top-5-java-performance-tuning-books.html
+	https://en.wikipedia.org/wiki/Mutual_exclusion
+	http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
+	
+Java SSL:
+	http://docs.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html#HowSSLWorks
+	https://alpacapowered.wordpress.com/2014/10/20/ssl-poodle-attack-what-is-this-scsv-thingy/
+	https://blogs.oracle.com/java-platform-group/entry/diagnosing_tls_ssl_and_https
+	http://docs.oracle.com/javase/7/docs/technotes/guides/security/jsse/JSSERefGuide.html#Customization
+	Some Solution::
+	http://www.oracle.com/technetwork/java/javase/documentation/cve-2014-3566-2342133.html
+	Java SE Adaptation Guide
+	http://docs.oracle.com/javase/7/docs/webnotes/adoptionGuide/index.html
+	http://stackoverflow.com/questions/4682957/why-does-javas-sslsocket-send-a-version-2-client-hello
+	
+Timezones:
+	http://www.oracle.com/technetwork/java/javase/timezones-137583.html
+	http://www.oracle.com/technetwork/java/javase/tzdata-versions-138805.html
+	http://www.oracle.com/technetwork/java/javase/dst-faq-138158.html
+	http://lukaszbudnik.blogspot.com/2009/06/session-sharing-in-apache-tomcat.html
+	
+	
+Rest Notes:
+	http://geekofreak.com/2013/06/5-best-websites-to-learn-fast-typing.html#ixzz379YqauZl
+	http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api
+	http://restful-api-design.readthedocs.io/en/latest/methods.html
+
+API Versioning:
+	https://stripe.com/docs/api#versioning
+
+Spring in Action:
+	http://www.baeldung.com/rest-with-spring-series/

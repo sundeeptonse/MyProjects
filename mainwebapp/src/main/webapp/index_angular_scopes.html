@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="js/thirdparty/angular/1.5/angular.js"></script>
+<title>Angular JS Example</title>
+</head>
+<body ng-app>
+
+	<!-- 
+	Scopes provide a single source of truth within your application. 
+	The idea is that no matter in how many places you display some data in your view layer, you should only have to change it in one place (a scope property), 	
+	and the change should automatically propagate throughout the view.
+
+	The objects attached to Angular scopes are JavaScript POJOs, since Angular applies sophisticated change detection at runtime in order to propagate changes. 
+	When the Object.observe language feature makes it into mainstream JavaScript, Angular may truly become a plain old JavaScript framework.
+
+	The variables that we initialized inside expressions and using ng-init in the examples above? These are all scope properties. 
+ 	-->
+
+	<!-- 
+		The argument to ng-click can be any expression. 
+		Although it is a versatile directive that is not limited to acting upon scope properties, the inline code for flipping a boolean works well
+		since it is so simple. 
+ 	-->
+	<p ng-init="authorized = true">
+		The secret code is <span ng-show="authorized">0123</span> <span
+			ng-hide="authorized">not for you to see</span> <br> <input
+			type="button" value="toggle" ng-click="authorized = !authorized">
+	</p>
+
+	<!--
+		ng-model
+		It seems like every introduction to Angular demonstrates data binding with a text input and a string property
+			This example is the poster child for two-way binding. 
+			When we add the ng-model directive to the HTML input element, 
+			Angular wraps the default HTML control in its own input directive.
+
+			What more can we do? Well, we can always use ng-init to provide an initial property value.
+ 	-->
+
+	<input type="text" ng-model="title2"> is bound to "
+	<strong ng-bind="title2"></strong>". Type something in the box!
+
+	<br />
+	<input type="text" ng-init="title = 'Angular'" ng-model="title">
+	is bound to "
+	<strong ng-bind="title"></strong>". Change it!
+
+	<br />
+	<input type='checkbox' ng-init='optIn = true' ng-model='optIn'>
+	is bound to
+	<strong ng-bind="optIn"></strong>. Change it!
+
+	<!-- 
+		The value bound to a checkbox can be a string rather than a boolean if you set the ng-true-value and ng-false-value parameters.
+	 -->
+
+	<input type='checkbox' ng-init='feeling = "love it"' ng-model='feeling'
+		ng-true-value='"love it"' ng-false-value='"hate it"'> is bound
+	to "
+	<strong ng-bind="feeling"></strong>". Change it!
+
+	<br />
+
+	<select ng-init='answer = "maybe"' ng-model='answer'>
+		<option value='yes' selected>Yes</option>
+		<option value='no'>No</option>
+		<option value='maybe'>Maybe</option>
+	</select> is bound to "
+	<strong ng-bind="answer"></strong>". Change it!
+
+
+	<br />
+	<div ng-init='answer = "maybe"'>
+		<input type='radio' ng-model='answer' value='yes'> Yes <input
+			type='radio' ng-model='answer' value='no'> No <input
+			type='radio' ng-model='answer' value='maybe'> Maybe is bound
+		to "<strong ng-bind="answer"></strong>". Change it!
+	</div>
+
+</body>
+</html>

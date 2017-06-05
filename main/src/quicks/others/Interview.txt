@@ -1,0 +1,181 @@
+Prep Work:
+	http://www.geeksforgeeks.org/top-10-algorithms-in-interview-questions/
+	http://www.geeksforgeeks.org/top-algorithms-and-data-structures-for-competitive-programming/
+	http://www.geeksforgeeks.org/power-set/
+	https://www.hackerrank.com/challenges/lonely-integer/topics/bitwise-xor
+	https://www.hackerrank.com/contests/w27/challenges/how-many-substrings
+	https://www.codecademy.com
+	http://www.gainlo.co
+	https://www.hackerrank.com/tests/sample
+	https://www.hackerearth.com/
+
+	https://www.linkedin.com/pulse/20141120061048-6976444-ace-the-coding-interview-every-time?trk=hp-feed-article-title-comment
+	http://content.wisestep.com/how-to-prepare-for-amazon-phone-interview-best-tips/
+	http://steve-yegge.blogspot.com/2008/03/get-that-job-at-google.html
+	http://algorithmsandme.in/2014/03/sliding-window-algorithm/
+	http://www.quora.com/What-are-the-top-10-pieces-of-career-advice-Gayle-Laakmann-McDowell-would-give-to-future-software-engineers/answer/Gayle-Laakmann-McDowell
+
+
+System Design Blogs:
+	https://medium.freecodecamp.com/how-to-talk-about-your-side-projects-18b96f192817#.8wphd3e6n
+	http://blog.gainlo.co/index.php/2015/10/22/8-things-you-need-to-know-before-system-design-interviews/
+	https://www.palantir.com/2011/10/how-to-ace-a-systems-design-interview/
+	http://blog.gainlo.co/index.php/2016/02/17/system-design-interview-question-how-to-design-twitter-part-1/?utm_source=quora&utm_medium=+What+books+are+useful+for+a+system+design+interview%3F&utm_campaign=quora
+	http://blog.gainlo.co/index.php/2016/02/24/system-design-interview-question-how-to-design-twitter-part-2/?utm_source=quora&utm_medium=+What+books+are+useful+for+a+system+design+interview%3F&utm_campaign=quora
+
+
+Sites:	
+	https://www.hiredintech.com
+	https://www.educative.io/collection/5668639101419520/5649050225344512
+	https://www.youtube.com/results?search_query=system+design+interview+questions
+
+
+LinkedIN:
+	https://www.job-hunt.org/social-networking/LinkedIn-job-search/linkedin-keywords.shtml
+	https://www.job-hunt.org/IT-job-search/optimizing-key-words-LinkedIn.shtml
+	https://www.job-hunt.org/personal-SEO/top-25-job-search-keywords.shtml
+	https://www.linkedin.com/pulse/how-where-best-use-keywords-linkedin-profile-seo-lisa-k-mcdonald
+	http://www.huffingtonpost.com/susan-p-joyce/20-kinds-of-keywords-jobs_b_5092363.html
+	http://qz.com/229570/here-are-most-valuable-skills-in-americas-tech-job-market/
+	http://www.indeed.com/jobtrends/q-application-engineer-q-application-developer-q-senior-java-developer-q-Full-Stack.html
+
+
+Others:
+	Educational/Learning
+	khanacademy.org - video lectures on just about any subject
+	ted.com - lectures by smart people
+	academicearth.org - classroom lectures
+	freerice.com - expand your vocabulary while feeding the hungry
+	lizardpoint.com - a collection of geography quizzes
+	mathrun.net - timed math quizzes
+	classicshorts.com - the best short stories
+	erowid.org - learn about drugs
+	unplugthetv.com - a collection of intellectually stimulating videos
+	factsie.com - a place to learn amazing and unusual historical and scientific facts
+	100+ Google Tricks That Will Save You Time - Today, knowing how to use Google effectively is a vital skill.  This list links out to enough Google related resources to make you an elite Google hacker.
+	100 Skills Every Man Should Know - Another compilation article with instructions to help you learn new skills.  This one says it’s geared for men, but I think most of these skills are applicable to women as well.
+	Work.com - An extensive directory of how-to guides for beginning entrepreneurs.
+	Learn Skills
+	highercomputingforeveryone.com - learn to program in C
+	thechesswebsite.com - a bunch of chess tactics, tutorials, and puzzles
+	htmldog.com - learn html
+	codecademy.com - learn to code through interactive lessons
+	cookingforengineers.com - learn to cook
+	digital-photography-school.com - learn photography
+	memrise.com - learn a foreign language
+	justinguitar.com - guitar video tutorials
+	livemocha.com - a language learning community
+	musictheory.net - learn music theory
+	investopedia.com - learn and practice investing
+	All Recipes - A complete guide to recipes and cooking tips.  If you’d like to learn to be a better cook, this site is for you.
+	Woopid - Watch free technology training videos.  Get help and answer your computer and gadget questions with thousands of video tutorials for PCs, Macs, and various software applications.
+	DIY Network - A go-to destination for rip-up, knock-out home improvement projects.  The site offers expert answers the most sought-after questions regarding creative projects for DIY enthusiasts.
+	Useful Web Apps
+	mint.com - for budgeting your money
+	duckduckgo.com - a search engine that isn’t following you
+	padmapper.com - maps out possible apartments/homes that fit your criteria
+	zillow.com - another great source for finding your next home
+	printfriendly.com - make any webpage print friendly
+	printwhatyoulike.com - print precisely what you want from any webpage
+	privnote.com - write a note to someone that will self-destruct after they read it
+	freecycle.org - a network of people giving away free stuff in their towns
+	couchsurfing.org - crash on someone’s couch anywhere in the world
+	recipepuppy.com - search for recipes based on the ingredients you have
+	pipl.com - a search engine for finding people
+	donorschoose.org - donate to a classroom in need
+	charitynavigator.org - evaluates various charities
+	govdeals.com - find cheap stuff the government is getting rid of
+	newsmap.jp - popular news headlines
+	radioreference.com - listen to radio channels across the nation
+	jimmyr.com - link aggregator
+	msworddit.com - Reddit in Microsoft Word form
+	wepay.com - like paypal but less scummy
+	thefuckingweather.com - a more profane look at the weather
+	wolframalpha.com - a computational knowledge engine
+	heavens-above.com - follow satellites and constellations
+	whatismyip.com - figure out you I.P. address
+	spreeder.com - improve reading speed and comprehension
+	simplynoise.com - listen to white noise
+	camelcamelcamel.com - tracks prices for any product
+	ptable.com - an interactive periodic table
+	retailmenot.com - find coupons for just about anything
+	searchtempest.com - search all of craigslist with one search
+	join.me - peek in on somebody’s computer screen
+	thistothat.com - find out the best way to glue this to that
+	woorank.com - find out what your website is missing, how you can improve it, and how to make Google recognize it better
+	scribblemaps.com - draw on maps then share them with friends
+	mailvu.com - video email
+	rhymer.com - online rhyming dictionary
+	homestyler.com - design your dream home
+	wetransfer.com - an easy way to send big files
+	mapofthedead.com - shows places around you to help you survive the zombie apocalypse
+	pastebin.com - a place to paste text
+	idlekeyboard.com - make it sound like you’re hard at work
+	wherethefuckshouldigofordrinks.com - find somewhere to get a drink in your area
+	dropbox.com - backup your sensitive document online
+	seatguru.com - find out where the best seats are on your plane flight
+	unlistmy.info - find out which websites store data about you, and tell them to unlist your info
+	ifoundyourcamera.net - a collection of lost cameras
+	sizeasy.com - check the size of items you buy online
+	sleepyti.me - plan out your sleep schedule better
+	ninite.com - download all the free software you want at the same time
+	ripetrack.com - find out when certain fruits are ripe
+	compassionpit.com - talk out your problems with others, or help others yourself
+	paperbackswap.com - swap books with others
+	reddpics.com - a look at Reddit’s favorite pictures
+	swole.me - plan out your meals better
+	weatherspark.com - a graphical look at the weather
+	network-tools.com - network tools
+	amazon.com - the best place to buy things online
+	writecheck.com - correct grammar and check for plagiarism
+	wakerupper.com - send yourself a wake-up call
+	pcpartpicker.com - plan out your next pc build
+	nophonetrees.com - talk to an actual person instead of a machine when you call customer service
+	theuselessweb.com - visit random useless websites
+	loads.in - find out how long it takes websites to load
+	ShowMeDo - A peer-produced video-tutorials and screencasts site for free and open-source software.  The large majority are free to watch and download.
+	Entertainment - Music, Movies, Sports, Books
+	redditunes.com - Reddit’s favorite music
+	grooveshark.com - great place to listen to tunes
+	isitback.com - find out when your favorite television shows come back on air
+	literature-map.com - type in an author and they will show you others of a similar style
+	runpee.com - find out the best time to run to the bathroom during any movie
+	songkick.com - searches your music library and tells you when your favorite musicians play in your area
+	midomi.com - sing or hum a song you don’t the name of and it will identify it for you
+	slashfilm.com - the best movie news blog on the internet
+	nanocrowd.com - find out what movie you should watch next
+	page99test.com - read page 99 of a book
+	bookseer.com - get recommendations for your next read
+	sbnation.com - awesome community of sports blogs
+	justthefirstframe.com - just the first frame of today’s webcomics
+	music-map.com - find similar musicians
+	iwl.me - find which famous writer your write like
+	iwl.com -  
+	
+	Other Interesting Blogs
+	thestuffofmen.com - cool stuff every man should own
+	artofmanliness.com - learn man stuff
+	johnnywebber.com - hobbies, habits, and personal growth
+	thedailymiscellany.com - daily tips, DIYs, ane more
+	getrichslowly.org - personal finance advice
+	thedatingspecialist.com - seduction tips
+	brainpickings.org - a human-powered discovery engine
+	fivethirtyeight.blogs.nytimes.com - a look at politics through the numbers
+	hackaday.com - a new DIY project every day
+	shorpy.com - old and interesting pictures
+	The Big Picture - amazing pictures covering the latest news around the world
+	newscientist.com - science news
+	uncrate.com - a place for stuff men love
+	tastespotting.com - pictures of delicious food
+	zenhabits.net - take a breath and read this blog
+	foodgawker.com - more pictures of delicious food
+	theburninghouse.com - a blog cataloging which possessions people choose to save from a burning home
+	dwellinggawker.com - check out how amazing the inside of some homes look
+	thesimpledollar.com - more personal finance advice
+	veryquiet.com - world news and analysis
+	mentalfloss.com - where knowledge junkies get their fix
+	mrmoneymustache.com - financial advice through badassity
+	studyblue.com - study tips
+	lettersofnote.com - personal letters written by famous people
+	Function Space - For Science learners and enthusiasts.
+	      Keep Checking and Keep Quoraing  :)

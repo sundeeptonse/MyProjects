@@ -1,0 +1,17 @@
+To check Tomcat Version : 
+${JAVA_HOME}/java -cp lib/catalina.jar org.apache.catalina.util.ServerInfo
+
+Server.xml
+
+	Access Log:
+	<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="log_log." suffix=".txt"
+               pattern="%a %I %t %m %U %S %s %b %D %T" />
+               
+     Connector Properties
+     SSLEnabled="true" protocol="org.apache.coyote.http11.Http11NioProtocol" port="**"
+     secure="true" clientAuth="false" sslEnabledProtocols="ALL" URIEncoding="UTF-8"
+     keystoreFile=".keystore" keystorePass="pass" ciphers="**"
+
+	Context.xml
+     docBase="${VAR_NAME}/file.war"

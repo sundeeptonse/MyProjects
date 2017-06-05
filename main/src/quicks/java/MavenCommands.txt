@@ -1,0 +1,14 @@
+#Local Install 
+./mvn install:install-file -Dfile={FILE} -DgroupId={GROUPID} -DartifactId={ARTIFACTID} -Dversion={VERSION} -Dpackaging=jar
+
+#Deploy on Server
+./mvn deploy:deploy-file   -Dfile={FILE} -DgroupId={GROUPID} -DartifactId={ARTIFACTID} -Dversion={VERSION} -Dpackaging=jar  -DrepositoryId=thirdparty -Durl={URL}
+
+Needs password of Server: 
+{MAVEN_HOME}/conf/settings.xml
+Add to
+<server>
+     <id>thirdparty</id>
+     <username>*</username>
+     <password>*</password>
+</server>

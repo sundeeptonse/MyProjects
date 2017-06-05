@@ -1,0 +1,117 @@
+Linux Commands to Update
+	ps -p 18484 -o %cpu,%mem,cmd
+	pkill -f "{SCRIPT}"
+	pgrep -f "{SCRIPT}”
+
+
+Cut Line
+sed -n -e "100,150p" FileName  
+
+# of Processes : ps huH p 20330 | wc -l
+Check Threads on a pid:
+	ps -eLo pid,lwp,nlwp,ruser,pcpu,stime,stime,args --sort=-pcpu | grep 13748
+	ps -p 13748 -eLo pid,lwp,nlwp,ruser,pcpu,stime,stime | grep 13748
+Sort Processes by cpu util:
+	ps -eo pid,user,pcpu,command --sort=-pcpu 
+Prints Thread Id of a process
+	ps -Lp 13748
+	
+	
+SAR(System Accounting Report)	
+	a) vmstat
+	b) iostat
+	c) prstat and so on
+       iostat(1), sar(1), mpstat(1), ps(1), top(1), free(1)
+	vmstat/vmstat1
+	
+	
+To add env variable. 
+Bash Profile:
+	~/.bash_profile
+
+
+sysctl -a
+ulimit -a
+cat /etc/sysctl.conf
+
+Find All:
+
+	find .|xargs grep "Text"
+
+
+VLAN Check:
+
+	netstat -rn
+	Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+	${SUBNET}    	 0.0.0.0        	*	   		U         0 0          0 eth0
+	***    			 0.0.0.0         	*    		U         0 0          0 eth0
+	0.0.0.0          *    			0.0.0.0         UG        0 0          0 eth0
+	-bash-3.2$ 
+	
+	${SUBNET} is the subnet
+	
+	cat /ngs/global/etc/subnets |grep -i ${SUBNET}
+	
+	----
+	output 
+	----------
+	
+	${VLAN Info}
+	
+	
+Date:
+	date -d "26-Mar-2011 00:00" +'%Y-%m-%d %H:%M:%S'
+	echo "26-Mar-2011 00:00" | date -d +'%Y-%m-%d %H:%M:%S'
+	echo "26-Mar-2011 00:00" | date -d - "+%Y-%m-%d %H:%M:%S" --date='TZ="PST"' 
+	date --date='TZ="UTC" 2009-01-01 20:57:22'
+	date -d %m/%d/%Y
+	
+
+Greps:
+	grep "" ${LOGFILE} | awk '{print $4,$7}' | grep -E ".html|.png|.jpeg|.jpg|.xml"  | cut -c2-22 | awk -F: '{print $1,$2}' | sort -n | uniq -c
+
+	
+CPU Cores:
+	Finding the number of CPU cores on a Linux server can be challenging.   
+	The way /proc/cpuinfo displays information makes it hard to distinguish between real CPU cores and logical hyperthreading CPU's.     
+	 
+	For example, consider if I run the following command on my Linux laptop:
+	$ cat /proc/cpuinfo  | grep processor
+	processor    : 0
+	processor    : 1
+	processor    : 2
+	processor    : 3
+	
+	At first glance it appears that my laptop has 4 CPU cores in it.     
+	However, it really has 2 CPU cores with hyperthreading enabled.  The hyperthreading presents 2 logical CPU's to the operating system for each actual core so it effectively doubles the number of logical CPU's your system will see in /proc/cpuinfo. 
+	The fields under /proc/cpuinfo that you need to compare to find the number of cores are "physical id" and "cored id".    The "physical id" will identifier for the physical CPU socket.   So to find the number of actual CPU sockets being used you can run this command:
+	$cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l
+	In this example the computer only has 1 physical socket being used. 
+	To show the total number of cores, you need to look at both "physical id" and "core id".   "core id" is the identifier for each core on a CPU socket.    If we run this command:
+	$ cat /proc/cpuinfo | egrep "core id|physical id" 
+	physical id    : 0
+	core id        : 0
+	physical id    : 0
+	core id        : 0
+	physical id    : 0
+	core id        : 2
+	physical id    : 0
+	core id        : 2
+	
+	 
+	Put every 2 lines together (i.e. line 1 and 2, lines 3 and 4, lines 5 and 6, and lines 7 and 8) to see information about the 4 logical CPU's on the system.    If you compare lines 1 and 2 to lines 3 and 4 you will see that they are identical.   This is because lines 1-4 are actually a single CPU core that are presented as 2 logical CPU's due to hyperthreading.   So based on this output we can see there are 2 unique CPU cores (lines 1-4 and lines 5-8).
+	Using the following command we can tie all of this together to show the number of cores on a system:
+	$ cat /proc/cpuinfo | egrep "core id|physical id" | tr -d "\n" | sed s/physical/\\nphysical/g | grep -v ^$ | sort | uniq | wc -l
+	This command squishes the /proc/cpuinfo physical id and core id for each logical CPU on to the same line, and then sorts them and runs uniq to remove the extra hyperthreading logical CPU's.   The final result is the number of CPU cores on your Linux system.  
+	As previously mentioned you can also run this command to see the number of physical CPU sockets in use:
+	$  cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l
+	So in our example here we have a single CPU socket and 2 CPU cores.   
+	
+	
+	Hardware Cores:
+	File :  /proc/cpuinfo
+	No of Cores : 
+		cat /proc/cpuinfo | egrep "core id|physical id" | tr -d "\n" | sed s/physical/\\nphysical/g | grep -v ^$ | sort | uniq | wc -l
+	
+	No of CPU Sockets:
+	  cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l

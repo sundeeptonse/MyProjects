@@ -1,0 +1,4 @@
+Format: Command + Shift + F
+Resources:  Command + Shift + R
+Imports: Command + Shift + O
+Quick Outline for Class: Command + O

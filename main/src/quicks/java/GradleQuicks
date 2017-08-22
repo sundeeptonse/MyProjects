@@ -1,0 +1,15 @@
+Apply Maven
+
+apply plugin: "maven"
+
+group = "foo"
+version = "1.0"
+example/build.gradle:
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    compile "foo:sdk:1.0"
+}

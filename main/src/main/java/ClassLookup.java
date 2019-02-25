@@ -12,7 +12,7 @@ public class ClassLookup {
 	
 	String test = "11";
 	static{
-		
+
 	}
 	
 	

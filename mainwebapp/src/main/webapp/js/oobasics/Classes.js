@@ -2,7 +2,7 @@ function Person(name) {
 
     //Static Variables
     this.constructor.population++;
-    //Privelged Variables
+    //Privileged Variables
     this._variables = {
         name: name,
         a: "test",
